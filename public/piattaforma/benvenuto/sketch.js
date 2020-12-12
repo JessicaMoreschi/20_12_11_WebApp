@@ -41,7 +41,7 @@ function setup() {
 /////////////////////////////////////////////////////////////////////////
 function draw() {
   //CONTATORE i DEL TEMPO
-  if (frameCount % 15 == 0) { //multiplo di 50 incrementa i
+  if (frameCount % 2 == 0) { //multiplo di 50 incrementa i
     i++;
   }
 
@@ -306,6 +306,7 @@ function draw() {
     text('INIZIA UNA VERA ESPERIENZA DI TIFO', w * 10, h * 39);
     pop();
   } else if (pag == 9) {
+    background('#887b86'); //scuro
     window.open('../indexPausa.html', '_self');
   }
 }
