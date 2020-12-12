@@ -36,7 +36,7 @@ let p = 0; //contatore parole
 // 	myRec.interimResults = true; // allow partial recognition (faster, less accurate)
 /////////// BONUS VARIABILI //////////////////////////////////////////////////////////////
 
-let bonus5 = 0; //se i bonus sono tutti attivi apri un altra parte di sketch
+let bonus6; //se i bonus sono tutti attivi apri un altra parte di sketch
 
 //////// DASPO VARIABILI /////////////////////////////////////////////////////////////////
 //Volume daspo
@@ -49,7 +49,7 @@ let incremento_daspo = 0;
 let timeout_daspo; //variabile per riavviare la funzione Timeout del daspo
 let daspo_3, daspo_4, daspo_5;
 let gif_daspo;
-/////////////////////////////////////////////////////////////////////////
+////////// FINE DASPO ///////////////////////////////////////////////////////////////
 
 
 ////////////////COMUNICAZIONE SERVER/////////////////////////////////////
@@ -144,24 +144,26 @@ function draw() {
   rect(w * 10 - width / 7, h * 45.5 - 7.5, xBarra, 15, 20);
   pop();
 
-  //pallini BONUS
+  /////////////////// BONUS ////////////////////////////////////
+  
   for (let i = 0; i < 6; i++) {
     if (p_coord > 60) {
       push();
       fill('#877B85');
       ellipse(w, h * 45.5, 15);
       pop();
+      bonus6++;
     }
     ellipse(w + s, h * 45.5, 15);
     s = 25 * i;
   }
 
-  /////////////////// LA PARTE SOPRA è STANDARD ///////////////////////////////////////////////
-  //microfono input
-  //let vol = round(mic.getLevel(), 2) * 1000;
-  ////console.log('volume: ' + vol);
-  if (bonus5 == 1) {
+  if (bonus6 == 6) {
     document.getElementById("tutorial").style.display = "none";
+  }
+
+  /////////////////// LA PARTE SOPRA è STANDARD ///////////////////////////////////////////////
+
     push();
     //CONTENITORI PAROLE VECCHE
     rectMode(CENTER);
