@@ -296,7 +296,7 @@ function draw() {
   // FEED UTENTE (PALLINI COLORATI)
   if (topPrediction == 'up' && i % 2 == 0) { //alza la sciarpa
 
-    input_utente = 143;
+    input_utente = 147;
     push();
     var z = 25 + p_coord;
     tint(255, z * 3.5); // Display at half opacity
