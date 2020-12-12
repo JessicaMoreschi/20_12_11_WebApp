@@ -23,9 +23,9 @@ let pronto //coordinzaione tutorial
 
 
 // variabili BONUS ////////////////////////////////////////////////////////////////////
-let bonus_preso = 0;
-let contBonus = 0; //conta quando p_coord arriva a 100
-let bonus_server;
+// se totale bonus apri un altra schermata
+let bonus_preso; //se i bonus sono tutti attivi apri un altra parte di sketch
+let contBonus; //conta quando p_coord arriva a 100
 
 
 
@@ -88,6 +88,18 @@ function updateTesto(dataReceived) {
   testo = dataReceived //assegna a testo dati da server
 }
 
+// RICEZIONE BONUS
+socket.on("bonusIn", bonusServer);
+socket.on("bonusTotIn", bonusTotale_Ok);
+
+// UPDATE DA SERVER BONUS
+function bonusServer(dataReceived) {
+  contBonus = dataReceived; //assegna a contBonus dati da server
+}
+
+function bonusTotale_Ok(dataReceived) {
+  bonus_preso = dataReceived; //assegna a contBonus dati da server
+}
 ////////////////FINE COMUNICAZIONE SERVER/////////////////////////////////////
 
 
@@ -229,12 +241,17 @@ function draw() {
 
     } else if (contBonus === 24) {
 
-      window.open('../bonus-app12uomo/index.html', '_self'); //doppio puntino per andare nella cartella sopra
       contBonus = 0; //azzerare i bonus
       bonus_preso = 1; //per dire che hai completato una fascia di bonus
+      window.open('../bonus-app12uomo/index.html', '_self'); //doppio puntino per andare nella cartella sopra
     }
+
     ellipse(w + s, h * 45.5, 15);
     s = 25 * i;
+
+    //EMIT BONUS
+      socket.emit("bonusOut", contBonus);
+      socket.emit("bonusTotOut", bonus_preso);
   }
   ///////////////////////////////////////////////////////////////
 
