@@ -15,7 +15,6 @@ let textColorC = '#877B85';
 let bButtonColorS = '#F9F9F9';
 let bButtonColorD = '#F9F9F9';
 let bButtonColorC = '#F9F9F9';
-let bonus5 = 0; //se i bonus sono tutti attivi apri un altra parte di sketch
 
 //icone
 let baloonIcon, baloon_Puntini, noParola, logor, freccia;
@@ -35,7 +34,11 @@ let p = 0; //contatore parole
 // var myRec = new p5.SpeechRec('en-US', parseResult); // new P5.SpeechRec object
 // 	myRec.continuous = true; // do continuous recognition
 // 	myRec.interimResults = true; // allow partial recognition (faster, less accurate)
+/////////// BONUS VARIABILI //////////////////////////////////////////////////////////////
 
+let bonus5 = 0; //se i bonus sono tutti attivi apri un altra parte di sketch
+
+//////// DASPO VARIABILI /////////////////////////////////////////////////////////////////
 //Volume daspo
 let mic;
 //variabili per DASPO
@@ -47,7 +50,6 @@ let timeout_daspo; //variabile per riavviare la funzione Timeout del daspo
 let daspo_3, daspo_4, daspo_5;
 let gif_daspo;
 /////////////////////////////////////////////////////////////////////////
-
 
 
 ////////////////COMUNICAZIONE SERVER/////////////////////////////////////
