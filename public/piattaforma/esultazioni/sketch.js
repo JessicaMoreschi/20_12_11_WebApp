@@ -31,14 +31,6 @@ let opacità = 210 //opacità rettangolo tutorial
 let pronto //coordinzaione tutorial
 let p = 0; //contatore parole
 
-// var myRec = new p5.SpeechRec('en-US', parseResult); // new P5.SpeechRec object
-// 	myRec.continuous = true; // do continuous recognition
-// 	myRec.interimResults = true; // allow partial recognition (faster, less accurate)
-/////////// BONUS VARIABILI //////////////////////////////////////////////////////////////
-
-let bonus6; //se i bonus sono tutti attivi apri un altra parte di sketch
-
-//////// DASPO VARIABILI /////////////////////////////////////////////////////////////////
 //Volume daspo
 let mic;
 //variabili per DASPO
@@ -49,8 +41,10 @@ let incremento_daspo = 0;
 let timeout_daspo; //variabile per riavviare la funzione Timeout del daspo
 let daspo_3, daspo_4, daspo_5;
 let gif_daspo;
-////////// FINE DASPO ///////////////////////////////////////////////////////////////
+/////// FINE DASPO //////////////////////// INIZIO BONUS //////////////////////////////////////////
 
+// se totale bonus apri un altra schermata
+let bonus_preso; //se i bonus sono tutti attivi apri un altra parte di sketch
 
 ////////////////COMUNICAZIONE SERVER/////////////////////////////////////
 // RICEZIONE
@@ -144,26 +138,25 @@ function draw() {
   rect(w * 10 - width / 7, h * 45.5 - 7.5, xBarra, 15, 20);
   pop();
 
-  /////////////////// BONUS ////////////////////////////////////
-  
+  //pallini BONUS
   for (let i = 0; i < 6; i++) {
     if (p_coord > 60) {
       push();
       fill('#877B85');
       ellipse(w, h * 45.5, 15);
       pop();
-      bonus6++;
     }
     ellipse(w + s, h * 45.5, 15);
     s = 25 * i;
   }
 
-  if (bonus6 == 6) {
-    document.getElementById("tutorial").style.display = "none";
-  }
-
   /////////////////// LA PARTE SOPRA è STANDARD ///////////////////////////////////////////////
+  //microfono input
+  //let vol = round(mic.getLevel(), 2) * 1000;
+  ////console.log('volume: ' + vol);
 
+  if (bonus_preso == 1) {
+    document.getElementById("tutorial").style.display = "none";
     push();
     //CONTENITORI PAROLE VECCHE
     rectMode(CENTER);

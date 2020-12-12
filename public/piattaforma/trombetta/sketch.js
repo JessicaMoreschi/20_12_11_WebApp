@@ -21,7 +21,7 @@ let s = 0; //ellisse BONUS
 let alt = 1; //h dei rettangoli suono
 let i = 0; //regola ogni quanto cambia alt
 let p_coord = 0; //var coordinazione
-let contBonus = 0; //conta quando p_coord arriva a 100
+
 
 let feed_piattaforma = 0; //var piattaforma: quando alt!=1 viene incrementata
 let input_utente = 200 //var utente usa la trobetta, preme bottone
@@ -37,6 +37,9 @@ let timeout_daspo; //variabile per riavviare la funzione Timeout del daspo
 let daspo_3, daspo_4, daspo_5;
 let gif_daspo;
 
+// variabili bonus ////////////////////////////////////////////////////////////////////
+let bonus_preso=0;
+let contBonus=0; //conta quando p_coord arriva a 100
 
 ////////////////COMUNICAZIONE SERVER/////////////////////////////////////
 // RICEZIONE
@@ -95,6 +98,9 @@ function setup() {
   b2.id('pauseBtn');
 }
 
+
+let bonusTot;
+
 /////////////////////////////////////////////////////////////////////////
 function draw() {
   background('#F9F9F9'); //chiaro
@@ -145,26 +151,29 @@ function draw() {
   console.log('BONUS CONTATOR:' + contBonus);
 
   //pallini BONUS
-  for (let i = 0; i < 6; i++) {
-    if (contBonus === 3 || contBonus === 4 || contBonus === 5) {
+  for (let i = 0; i < 6; i++) { // ogni 4 da il bonus
+    if (contBonus === 4 || contBonus === 5 || contBonus === 6 || contBonus === 7) {
       push();
       fill('#877B85');
       ellipse(w, h * 45.5, 15);
       pop();
-    } else if (contBonus === 6 || contBonus === 7 || contBonus === 8) {
+
+    } else if (contBonus === 8 || contBonus === 9 || contBonus === 10 || contBonus === 11) {
       push();
       fill('#877B85');
       ellipse(w, h * 45.5, 15);
       ellipse(w + 25, h * 45.5, 15);
       pop();
-    } else if (contBonus === 9 || contBonus === 10 || contBonus === 11 || contBonus === 12 || contBonus === 13) {
+
+    } else if (contBonus === 12 || contBonus === 13 || contBonus === 14 || contBonus === 15 ) {
       push();
       fill('#877B85');
       ellipse(w, h * 45.5, 15);
       ellipse(w + 25, h * 45.5, 15);
       ellipse(w + 50, h * 45.5, 15);
       pop();
-    } else if (contBonus === 14 || contBonus === 15 || contBonus === 16 || contBonus === 17 || contBonus === 18) {
+
+    } else if (contBonus === 16 || contBonus === 17 || contBonus === 18 || contBonus === 19 ) {
       push();
       fill('#877B85');
       ellipse(w, h * 45.5, 15);
@@ -172,7 +181,8 @@ function draw() {
       ellipse(w + 50, h * 45.5, 15);
       ellipse(w + 75, h * 45.5, 15);
       pop();
-    } else if (contBonus === 19 || contBonus === 20 || contBonus === 21) {
+
+    } else if (contBonus === 20 || contBonus === 21 || contBonus === 22 || contBonus === 23) {
       push();
       fill('#877B85');
       ellipse(w, h * 45.5, 15);
@@ -181,8 +191,12 @@ function draw() {
       ellipse(w + 75, h * 45.5, 15);
       ellipse(w + 100, h * 45.5, 15);
       pop();
-    } else if (contBonus === 22) {
+
+    } else if (contBonus === 24) {
+
       window.open('../bonus-app12uomo/index.html', '_self'); //doppio puntino per andare nella cartella sopra
+      contBonus = 0; //azzerare i bonus
+      bonus_preso = 1; //per dire che hai completato una fascia di bonus
     }
     ellipse(w + s, h * 45.5, 15);
     s = 25 * i;
