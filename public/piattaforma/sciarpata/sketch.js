@@ -104,8 +104,7 @@ function preload() {
 /////////////////////////////////////////////////////////////////////////
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  frameRate(15); //rallenta
-
+  frameRate(25)
   capture = createCapture(VIDEO)
   capture.hide()
   init()
@@ -122,6 +121,12 @@ function setup() {
 
 /////////////////////////////////////////////////////////////////////////
 function draw() {
+
+  //CONTATORE i DEL TEMPO
+  if (frameCount % 70 == 0) { //multiplo di 50 incrementa i
+    i++
+  }
+
   background('#F9F9F9'); //chiaro
   imageMode(CENTER); //per pittogrammi
   noStroke();
@@ -218,11 +223,6 @@ function draw() {
   }
   ///////////////////////////////////////////////////////////////
 
-  //CONTATORE i DEL TEMPO
-  if (frameCount % 50 == 0) { //multiplo di 50 incrementa i
-    i++
-  }
-
   //PER LA BARRA DELLA PERCENTUALE
   if (topPrediction == 'up' && i % 2 == 0) {
     p_coord = round((feed_piattaforma * input_utente) / 100);
@@ -249,8 +249,8 @@ function draw() {
     document.getElementById("tutorial2").style.display = "none";
     image(sciarpaIcon, w * 10, h * 25, sciarpaIcon.width / 6, sciarpaIcon.height / 6); // scura
     if (topPrediction == 'up') {
-      feed_piattaforma++;
-    }
+  feed_piattaforma++;
+}
   }
 
   //rettangolo in opacità
@@ -296,8 +296,7 @@ function draw() {
   // FEED UTENTE (PALLINI COLORATI)
   if (topPrediction == 'up' && i % 2 == 0) { //alza la sciarpa
 
-
-    input_utente = 200;
+    input_utente = 143;
     push();
     var z = 25 + p_coord;
     tint(255, z * 3.5); // Display at half opacity
