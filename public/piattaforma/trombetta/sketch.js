@@ -37,7 +37,7 @@ let timeout_daspo; //variabile per riavviare la funzione Timeout del daspo
 let daspo_3, daspo_4, daspo_5;
 let gif_daspo;
 
-// variabili bonus ////////////////////////////////////////////////////////////////////
+// variabili BONUS ////////////////////////////////////////////////////////////////////
 let bonus_preso=0;
 let contBonus=0; //conta quando p_coord arriva a 100
 

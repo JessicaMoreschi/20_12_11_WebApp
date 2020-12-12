@@ -31,8 +31,8 @@ let opacità = 210 //opacità rettangolo tutorial
 let pronto //coordinzaione tutorial
 let p = 0; //contatore parole
 
-//Volume daspo
-let mic;
+/////// variabili DASPO //////////////////////////////////////////////
+let mic; //Volume daspo
 //variabili per DASPO
 let daspo = false; //variabile che dice se daspo è attiva in questo momento
 let daspo_counter = 0; //variabile che conta il numero di daspo
@@ -41,10 +41,12 @@ let incremento_daspo = 0;
 let timeout_daspo; //variabile per riavviare la funzione Timeout del daspo
 let daspo_3, daspo_4, daspo_5;
 let gif_daspo;
-/////// FINE DASPO //////////////////////// INIZIO BONUS //////////////////////////////////////////
 
+/////// variabili BONUS ////////////////////////////////////////////////////////////////////
 // se totale bonus apri un altra schermata
-let bonus_preso; //se i bonus sono tutti attivi apri un altra parte di sketch
+let bonus_preso = 0; //se i bonus sono tutti attivi apri un altra parte di sketch
+let contBonus = 0; //conta quando p_coord arriva a 100
+let bonus_server;
 
 ////////////////COMUNICAZIONE SERVER/////////////////////////////////////
 // RICEZIONE
@@ -77,7 +79,6 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  frameRate(15); //rallenta
 
   //impostazioni riconoscimento vocale
   let continuous = true; //continua a registrare
@@ -145,15 +146,20 @@ function draw() {
       fill('#877B85');
       ellipse(w, h * 45.5, 15);
       pop();
+      contBonus+=4;
     }
+
+    if (contBonus === 24) {
+      window.open('../bonus-app12uomo/index.html', '_self'); //doppio puntino per andare nella cartella sopra
+      contBonus = 0; //azzerare i bonus
+      bonus_preso = 1; //per dire che hai completato una fascia di bonus
+    }
+
     ellipse(w + s, h * 45.5, 15);
     s = 25 * i;
   }
 
   /////////////////// LA PARTE SOPRA è STANDARD ///////////////////////////////////////////////
-  //microfono input
-  //let vol = round(mic.getLevel(), 2) * 1000;
-  ////console.log('volume: ' + vol);
 
   if (bonus_preso == 1) {
     document.getElementById("tutorial").style.display = "none";
@@ -251,6 +257,10 @@ function draw() {
   if (input_utente == 1 && i > i_ritardo + 1) {
     p_coord = round(random(10, 80));
     input_utente = 0;
+  }
+
+  if ( i > i_ritardo + 2) {
+      window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   }
 
   push();
@@ -364,9 +374,8 @@ function gotSpeech() {
 /////////////////////////////////////////////////////////////////////////
 
 function mouseClicked() {
-  bonus5 = 1;
+  bonus_preso = 1;
 }
-
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
