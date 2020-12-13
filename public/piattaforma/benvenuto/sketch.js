@@ -1,3 +1,6 @@
+// VAR SERVER
+let socket = io(); //setting server
+
 let logoIcon, benvenuto, imm_condizioni;
 let b1, b2, button_text, testo_privacy, stadio;
 let imm1, imm2, imm3, imm4, strumenti;
@@ -11,6 +14,21 @@ let divieto = 'ELOGIA IL CONTENIMENTO';
 let sotto_divieto1 = 'Mantenere gesti e volume controllati: non sarà necessario'
 let sotto_divieto2 = 'sbracciarsi o fare schiamazzi di alcun tipo.'
 let step = 'step 1/4';
+
+let bonus_preso = 1;
+let contBonus = 12; //conta quando p_coord arriva a 100
+// RICEZIONE BONUS
+socket.on("bonusIn", bonusServer);
+socket.on("bonusTotIn", bonusTotale_Ok);
+
+// UPDATE DA SERVER BONUS
+function bonusServer(dataReceived) {
+  contBonus = dataReceived; //assegna a contBonus dati da server
+}
+
+function bonusTotale_Ok(dataReceived) {
+  bonus_preso = dataReceived; //assegna a contBonus dati da server
+}
 /////////////////////////////////////////////////////////////////////////
 
 function preload() {
@@ -48,6 +66,10 @@ function draw() {
   w = width / 20;
   h = height / 50;
 
+  //EMIT BONUS
+    socket.emit("bonusOut", contBonus);
+    socket.emit("bonusTotOut", bonus_preso);
+    
   if (i > 1 && pag == 0) {
     background('#F9F9F9'); //chiaro
     button_text = 'Inizia';

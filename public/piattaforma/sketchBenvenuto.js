@@ -1,3 +1,6 @@
+// VAR SERVER
+let socket = io(); //setting server
+
 let logoIcon, benvenuto;
 let pag = 0;
 let button;
