@@ -69,7 +69,7 @@ function draw() {
   //EMIT BONUS
     socket.emit("bonusOut", contBonus);
     socket.emit("bonusTotOut", bonus_preso);
-    
+
   if (i > 1 && pag == 0) {
     background('#F9F9F9'); //chiaro
     button_text = 'Inizia';
@@ -350,8 +350,6 @@ function back() {
   pag--;
 }
 
-//function pagina(){ pag++;}
-
 /////////////////////////////////////////////////////////////////////////////
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
@@ -359,10 +357,3 @@ function windowResized() {
   imageMode(CENTER); //per pittogrammi
   image(logoIcon, width / 2, height / 2, logoIcon.width / 7, logoIcon.height / 7);
 }
-
-// h1= createP('Benvenuto,');
-// h1.position( 0 ,  h * 11 );
-// h1.style('color','#877B85');
-// h2= createP('Dodicesimo Uomo');
-// h2.position( 0,  h * 13);
-// h2.style('color','#B7AEB5')

@@ -1,6 +1,5 @@
 // VAR SERVER
-let socket = io(); //setting server
-
+//let socket = io(); //setting server
 let logoIcon, benvenuto;
 let pag = 0;
 let button;
@@ -26,7 +25,6 @@ function bonusTotale_Ok(dataReceived) {
 
 function preload() {
   logoIcon = loadImage("./assets/immagini/logo.png");
-  benvenuto = loadImage("./assets/immagini/benvenuto.png"); //trombetta chiara
 }
 /////////////////////////////////////////////////////////////////////////
 function setup() {
