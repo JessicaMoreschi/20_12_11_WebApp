@@ -287,11 +287,11 @@ function draw() {
     image(sciarpaBIcon, w * 10, h * 25, sciarpaBIcon.width / 6, sciarpaBIcon.height / 6); //chiara
     feed_piattaforma = 0;
   } else if (i % 2 == 0 && i > 3) { //cambio colore delle bottone centrale: feedback utente
-    if (j == 0 || j == 25 || j == 50) { //pulsazioni del cerchio
+    if (j == 0 || j == 23 || j == 46 || j==70) { //pulsazioni del cerchio
       pulsazione = 0
-    } else if (j < 12 || j > 25 && j < 37) {
+    } else if (j < 12 || j > 23 && j < 35 || j>46 && j<58) {
       pulsazione += 4;
-    } else if (j > 12 && j < 25 || j > 37 && j < 50) {
+    } else if (j > 12 && j < 23 || j > 35 && j < 46 || j>58 && j<70) {
       pulsazione -= 4;
     }
     push()
