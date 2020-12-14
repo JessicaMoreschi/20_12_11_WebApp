@@ -33,14 +33,16 @@ let p = 0; //contatore parole
 
 /////// variabili DASPO //////////////////////////////////////////////
 let mic; //Volume daspo
-//variabili per DASPO
 let daspo = false; //variabile che dice se daspo è attiva in questo momento
 let daspo_counter = 0; //variabile che conta il numero di daspo
-let op = 1; //opacità rettangolo daspo
-let incremento_daspo = 0;
-let timeout_daspo; //variabile per riavviare la funzione Timeout del daspo
-let daspo_3, daspo_4, daspo_5;
-let gif_daspo;
+let op = 0; //opacità rettangolo daspo
+let daspo_gif_3, daspo_gif_4, daspo_gif_5;
+let durata_daspo = 0; //durata della daspo
+let secondo_corrente = 0; //secondo dell'inizio daspo
+
+
+let j = 0; //sottomultiplo di i, ogni i è composto da 50 j
+let pulsazione = 0; //variabile per fare pulsare il cerchio della trombetta
 
 /////// variabili BONUS ////////////////////////////////////////////////////////////////////
 // se totale bonus apri un altra schermata
@@ -82,9 +84,9 @@ function preload() {
   noParola = loadImage("./assets/noParola.png"); //nuvoletta attiva
   logor = loadImage("./assets/logopiccolo.png") //logo ridotto
   freccia = loadImage("./assets/freccia.png");
-  daspo_3 = loadImage("./assets/daspo3.gif");
-  daspo_4 = loadImage("./assets/daspo4.gif");
-  daspo_5 = loadImage("./assets/daspo5.gif");
+  // daspo_3 = loadImage("./assets/daspo3.gif");
+  // daspo_4 = loadImage("./assets/daspo4.gif");
+  // daspo_5 = loadImage("./assets/daspo5.gif");
 }
 
 ////////////setup/////////////////////////////////////////////////////////////
@@ -235,6 +237,20 @@ function draw() {
 
     //ICONA CENTRALE CHE REAGISCE AL MIC
     if (i > 1 && p == 0) { // cambio colore del bottone centrale: feedback utente
+
+        if (j == 0 || j == 25 || j == 50) { //pulsazioni del cerchio
+          pulsazione = 0
+        } else if (j < 12 || j > 25 && j < 37) {
+          pulsazione += 4;
+        } else if (j > 12 && j < 25 || j > 37 && j < 50) {
+          pulsazione -= 4;
+        }
+        push()
+        noStroke()
+        fill("#E5E5E5")
+        ellipse(width / 2, height / 2, 100 + pulsazione)
+        pop()//fine puslazioni cerchio
+
       image(baloonIcon, width / 2, height / 2, baloonIcon.width / 4, baloonIcon.height / 4);
     } else if (i > 1 && p == 1) {
       image(noParola, width / 2, height / 2, noParola.width / 4, noParola.height / 4);
@@ -265,8 +281,10 @@ function draw() {
   }
 
   //ritmo
+  j++;
   if (frameCount % 50 == 0) { //multiplo di 50 incrementa i
     i++;
+    j = 0;
   }
 
   //PERCENTUALE
@@ -293,63 +311,73 @@ function draw() {
 
   //DASPO
   //daspo condizione
-  if (vol_1 > 30 && i > 1) {
+  if (vol_1 > 30 && i > 1 && daspo == false) {
     daspo = true;
     daspo_counter++;
-  } else if (vol_1 < 30 && i < 1) {
-    daspo = false;
-    op = 0;
+    secondo_corrente = testo;
   }
 
-  //attivare funzioni daspo
-  if (daspo == true) {
-    daspoAttiva();
-  }
-
-  incremento_daspo = 3000 + (daspo_counter) * 1000;
-  if (incremento_daspo > 5000) {
-    incremento_daspo = 5000;
-  }
-
-  //console.log("tempo daspo " + incremento_daspo)
-
-}
-////////fine draw///////////////////////////////////////////////////////////////////////////////////
-
-//funzioni per attivare la daspo
-function daspoAttiva() {
-  op = 210;
-  alt = 1;
-
+  //rettangolo in poacità per la daspo
   push();
   rectMode(CORNER);
   fill(255, 255, 255, op);
   rect(0, 0, width, height);
   pop();
 
-  if (incremento_daspo == 3000) {
-    gif_daspo = daspo_3
-  } else if (incremento_daspo == 4000) {
-    gif_daspo = daspo_4
-  } else if (incremento_daspo == 5000) {
-    gif_daspo = daspo_5
+  //gif diverse per durate diverse
+  if (!daspo_gif_3) {
+    daspo_gif_3 = createImg("./assets/immagini/daspo3.gif");
+    daspo_gif_3.hide();
   }
 
+  if (!daspo_gif_4) {
+    daspo_gif_4 = createImg("./assets/immagini/daspo4.gif");
+    daspo_gif_4.hide();
+  }
 
-  image(gif_daspo, width / 10, 3 * height / 4, gif_daspo.width / 2, gif_daspo.height / 2);
+  if (!daspo_gif_5) {
+    daspo_gif_5 = createImg("./assets/immagini/daspo5.gif");
+    daspo_gif_5.hide();
+  }
 
-  timeout_daspo = setTimeout(daspoNonAttiva, incremento_daspo);
+  //quando daspo==true fa partire la daspo giusta in base al numero di daspo
+  if (daspo == true) {
+    op = 210;
+
+    if (daspo_counter == 1) {
+      durata_daspo = 3;
+      daspo_gif_3.show();
+      daspo_gif_3.size(150, AUTO);
+      daspo_gif_3.position(width / 20, 3 * height / 4);
+    } else if (daspo_counter == 2) {
+      durata_daspo = 4;
+      daspo_gif_4.show();
+      daspo_gif_4.size(150, AUTO);
+      daspo_gif_4.position(width / 20, 3 * height / 4);
+    } else if (daspo_counter > 2) {
+      durata_daspo = 5;
+      daspo_gif_5.show();
+      daspo_gif_5.size(150, AUTO);
+      daspo_gif_5.position(width / 20, 3 * height / 4);
+    }
+  }
+
+  //chiusur daspo dopo tot secondi
+  if (daspo == true && testo == secondo_corrente - durata_daspo) {
+    op = 0;
+    daspo = false;
+    if (daspo_counter == 1) {
+      daspo_gif_3.hide();
+    } else if (daspo_counter == 2) {
+      daspo_gif_4.hide();
+    } else if (daspo_counter > 2) {
+      daspo_gif_5.hide();
+    }
+  }
+
 }
+////////fine draw///////////////////////////////////////////////////////////////////////////////////
 
-//funzione per disattivare la daspo cambiando la variabile
-function daspoNonAttiva() {
-  daspo = false;
-}
-
-//riavvia il timer per daspo
-function nonAttivafine() {
-  clearTimeout(timeout_daspo);
-}
 
 ////////// Riconoscimento vocale parole //////////////////////////////////////////////////////////////
 
