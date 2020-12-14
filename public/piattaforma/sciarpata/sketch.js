@@ -25,7 +25,7 @@ let pronto //coordinzaione tutorial
 // variabili BONUS ////////////////////////////////////////////////////////////////////
 let bonus_preso = 0; //se i bonus sono tutti attivi apri un altra parte di sketch
 let contBonus = 0; //conta quando p_coord arriva a 100
-
+let contBonusSever;
 
 //variabili per DASPO
 let daspo = false; //variabile che dice se daspo è attiva in questo momento
@@ -38,8 +38,6 @@ let secondo_corrente = 0; //secondo dell'inizio daspo
 
 let j = 0; //sottomultiplo di i, ogni i è composto da 50 j
 let pulsazione = 0; //variabile per fare pulsare il cerchio della trombetta
-
-
 let boulPausa = false;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,8 +96,8 @@ socket.on("bonusTotIn", bonusTotale_Ok);
 
 // UPDATE DA SERVER BONUS
 function bonusServer(data1) {
-  console.log(data1 + ' bonus a caso');
-  contBonus = data1; //assegna a contBonus dati da server
+//  console.log(data1 + ' bonus a caso');
+  contBonusSever = data1; //assegna a contBonus dati da server
 }
 
 function bonusTotale_Ok(data2) {
@@ -142,6 +140,7 @@ function setup() {
   b2.position(w, h * 4.5);
   b2.mousePressed(dispPausa);
   b2.id('pauseBtn');
+  contBonus = contBonusSever;
 }
 
 /////////////////////////////////////////////////////////////////////////

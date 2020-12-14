@@ -7,8 +7,8 @@ var gap; //gap tra countDown e Now
 var runningTime = 180; //secondi che scorrono
 var thisTime = 180; //secondi allo stopTimer
 var testo = 180; //variabile testo this countdown
-var bonus_preso = 1;
-var contBonus = 12; //conta quando p_coord arriva a 100
+var bonus_preso = 0;
+var contBonus = 4; //conta quando p_coord arriva a 100
 
 
 var playAllVideo = false; //bouleana play/stop countdown

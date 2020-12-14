@@ -45,7 +45,7 @@ let pulsazione = 0; //variabile per fare pulsare il cerchio della trombetta
 // se totale bonus apri un altra schermata
 let bonus_preso = 0; //se i bonus sono tutti attivi apri un altra parte di sketch
 let contBonus = 0; //conta quando p_coord arriva a 100
-
+let contBonusSever;
 ////////////////COMUNICAZIONE SERVER/////////////////////////////////////
 // RICEZIONE
 socket.on("testoIn", updateTesto); //ricezione countdown
@@ -65,12 +65,12 @@ socket.on("bonusTotIn", bonusTotale_Ok);
 
 // UPDATE DA SERVER BONUS
 function bonusServer(data1) {
-  console.log(data1 + ' bonus a caso');
-  contBonus = data1; //assegna a contBonus dati da server
+//  console.log(data1 + ' bonus a caso');
+   contBonusSever = data1; //assegna a contBonus dati da server
 }
 
 function bonusTotale_Ok(data2) {
-  console.log(data2 + ' bonus tot ');
+//  console.log(data2 + ' bonus tot ');
   bonus_preso = data2; //assegna a contBonus dati da server
 }
 
@@ -114,13 +114,11 @@ function setup() {
   b2.position(w, h * 4.5);
   b2.mousePressed(dispPausa);
   b2.id('pauseBtn');
+  contBonus = contBonusSever;
 }
 
 /////////////////////////////////////////////////////////////////////////
 function draw() {
-  //EMIT BONUS
-  socket.emit("bonusOut", contBonus);
-  socket.emit("bonusTotOut", bonus_preso);
 
   background('#F9F9F9'); //chiaro
   imageMode(CENTER); //per pittogrammi
@@ -167,7 +165,11 @@ function draw() {
   if (p_coord === 80) {
     contBonus++;
   }
+
   console.log('BONUS CONTATOR:' + contBonus);
+  //EMIT BONUS
+  socket.emit("bonusOut", contBonus);
+  socket.emit("bonusTotOut", bonus_preso);
 
   //pallini BONUS
   for (let i = 0; i < 6; i++) { // ogni 4 da il bonus
@@ -219,6 +221,7 @@ function draw() {
     ellipse(w + s, h * 45.5, 15);
     s = 25 * i;
   }
+
   ///////////////////////////////////////////////////////////////
 
   //CONTATORE i DEL TEMPO
