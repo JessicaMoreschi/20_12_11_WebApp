@@ -32,9 +32,15 @@ let contBonus; //conta quando p_coord arriva a 100
 //variabili per DASPO
 let daspo = false; //variabile che dice se daspo è attiva in questo momento
 let daspo_counter = 0; //variabile che conta il numero di daspo
-let incremento_daspo = 0;
 let op = 0; //opacità rettangolo daspo
-let timeout_daspo;
+let daspo_gif_3, daspo_gif_4, daspo_gif_5;
+let durata_daspo = 0; //durata della daspo
+let secondo_corrente = 0; //secondo dell'inizio daspo
+
+
+let j = 0; //sottomultiplo di i, ogni i è composto da 50 j
+let pulsazione = 0; //variabile per fare pulsare il cerchio della trombetta
+
 
 let boulPausa = false;
 
@@ -114,9 +120,9 @@ function preload() {
   freccia = loadImage("./assets/immagini/freccia.png");
   sAlta = loadImage("./assets/immagini/Sciarpa_su.png");
   sBassa = loadImage("./assets/immagini/Sciarpa_giù.png");
-  daspo_3 = loadImage("./assets/immagini/daspo3.gif");
-  daspo_4 = loadImage("./assets/immagini/daspo4.gif");
-  daspo_5 = loadImage("./assets/immagini/daspo5.gif");
+  //   daspo_3 = loadImage("./assets/immagini/daspo3.gif");
+  //   daspo_4 = loadImage("./assets/immagini/daspo4.gif");
+  //   daspo_5 = loadImage("./assets/immagini/daspo5.gif");
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -141,8 +147,10 @@ function setup() {
 function draw() {
 
   //CONTATORE i DEL TEMPO
-  if (frameCount % 70 == 0) { //multiplo di 50 incrementa i
-    i++
+  j++;
+  if (frameCount % 70 == 0) { //multiplo di 70 incrementa i
+    i++;
+    j = 0;
   }
 
   background('#F9F9F9'); //chiaro
@@ -250,8 +258,8 @@ function draw() {
     s = 25 * i;
 
     //EMIT BONUS
-      socket.emit("bonusOut", contBonus);
-      socket.emit("bonusTotOut", bonus_preso);
+    socket.emit("bonusOut", contBonus);
+    socket.emit("bonusTotOut", bonus_preso);
   }
   ///////////////////////////////////////////////////////////////
 
@@ -279,6 +287,19 @@ function draw() {
     image(sciarpaBIcon, w * 10, h * 25, sciarpaBIcon.width / 6, sciarpaBIcon.height / 6); //chiara
     feed_piattaforma = 0;
   } else if (i % 2 == 0 && i > 3) { //cambio colore delle bottone centrale: feedback utente
+    if (j == 0 || j == 25 || j == 50) { //pulsazioni del cerchio
+      pulsazione = 0
+    } else if (j < 12 || j > 25 && j < 37) {
+      pulsazione += 4;
+    } else if (j > 12 && j < 25 || j > 37 && j < 50) {
+      pulsazione -= 4;
+    }
+    push()
+    noStroke()
+    fill("#E5E5E5")
+    ellipse(width / 2, height / 2, 100 + pulsazione)
+    pop() //fine puslazioni cerchio
+
     document.getElementById("tutorial2").style.display = "none";
     image(sciarpaIcon, w * 10, h * 25, sciarpaIcon.width / 6, sciarpaIcon.height / 6); // scura
     if (topPrediction == 'up') {
@@ -328,7 +349,7 @@ function draw() {
 
   // FEED UTENTE (PALLINI COLORATI)
   if (topPrediction == 'up' && i % 2 == 0) { //alza la sciarpa
-
+    pulsazione = 0;
     input_utente = 147;
     push();
     var z = 25 + p_coord;
@@ -349,30 +370,71 @@ function draw() {
     predict()
   }
 
-
-
   //DASPO
   //daspo condizione
-  if (topPrediction == 'up' && i % 2 != 0 && i > 3) {
+  if (topPrediction == 'up' && i % 2 != 0 && i > 3 && j > 15 && daspo == false) {
     daspo = true;
     daspo_counter++;
-  } else if (topPrediction == 'up' && i % 2 == 0 && i > 3 && daspo == false) {
-    daspo = false;
-    op = 0;
+    secondo_corrente = testo;
   }
 
+  //rettangolo in poacità per la daspo
+  push();
+  rectMode(CORNER);
+  fill(255, 255, 255, op);
+  rect(0, 0, width, height);
+  pop();
+
+  //gif diverse per durate diverse
+  if (!daspo_gif_3) {
+    daspo_gif_3 = createImg("./assets/immagini/daspo3.gif");
+    daspo_gif_3.hide();
+  }
+
+  if (!daspo_gif_4) {
+    daspo_gif_4 = createImg("./assets/immagini/daspo4.gif");
+    daspo_gif_4.hide();
+  }
+
+  if (!daspo_gif_5) {
+    daspo_gif_5 = createImg("./assets/immagini/daspo5.gif");
+    daspo_gif_5.hide();
+  }
+
+  //quando daspo==true fa partire la daspo giusta in base al numero di daspo
   if (daspo == true) {
-    daspoAttiva();
-    timeout_daspo = setTimeout(daspoNonAttiva, 3000);
+    op = 210;
+
+    if (daspo_counter == 1) {
+      durata_daspo = 3;
+      daspo_gif_3.show();
+      daspo_gif_3.size(150, AUTO);
+      daspo_gif_3.position(width / 20, 3 * height / 4);
+    } else if (daspo_counter == 2) {
+      durata_daspo = 4;
+      daspo_gif_4.show();
+      daspo_gif_4.size(150, AUTO);
+      daspo_gif_4.position(width / 20, 3 * height / 4);
+    } else if (daspo_counter > 2) {
+      durata_daspo = 5;
+      daspo_gif_5.show();
+      daspo_gif_5.size(150, AUTO);
+      daspo_gif_5.position(width / 20, 3 * height / 4);
+    }
   }
 
-  incremento_daspo = 3000 + daspo_counter * 1000;
-  if (incremento_daspo > 5000) {
-    incremento_daspo = 5000;
+  //chiusur daspo dopo tot secondi
+  if (daspo == true && testo == secondo_corrente - durata_daspo) {
+    op = 0;
+    daspo = false;
+    if (daspo_counter == 1) {
+      daspo_gif_3.hide();
+    } else if (daspo_counter == 2) {
+      daspo_gif_4.hide();
+    } else if (daspo_counter > 2) {
+      daspo_gif_5.hide();
+    }
   }
-
-  console.log("tempo daspo " + incremento_daspo)
-
 
   //console.log (topPrediction);
 
@@ -386,39 +448,6 @@ function draw() {
 
 ///////FINE DRAW/////////////////////////////////////////////////////
 
-//funzioni per attivare la daspo
-function daspoAttiva() {
-  op = 210;
-  daspo = true;
-  push();
-  rectMode(CORNER);
-  fill(255, 255, 255, op);
-  rect(0, 0, width, height);
-  pop();
-
-  if (incremento_daspo == 3000) {
-    gif_daspo = daspo_3
-  } else if (incremento_daspo == 4000) {
-    gif_daspo = daspo_4
-  } else if (incremento_daspo == 5000) {
-    gif_daspo = daspo_5
-  }
-
-
-  // image(gif_daspo, width / 10, 3*height / 4, gif_daspo.width/2 , gif_daspo.height/2 );
-  image(daspo_3, width / 10, 3 * height / 4, daspo_3.width / 2, daspo_3.height / 2);
-
-}
-
-//funzione per disattivare la daspo cambiando la variabile
-function daspoNonAttiva() {
-  daspo = false;
-}
-
-//riavvia il timer per daspo
-function nonAttivafine() {
-  clearTimeout(timeout_daspo);
-}
 
 //funzione trombetta
 function windowResized() {

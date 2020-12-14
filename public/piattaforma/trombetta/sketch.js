@@ -263,6 +263,7 @@ function draw() {
 
   textSize(16);
   fill('#B7AEB5'); //3 PALETTE
+
   //ICONA FEEDBACK DA SEGUIRE
   if (i % 2 != 0 && i > 5) {
 
@@ -383,7 +384,7 @@ function draw() {
     }
   }
 
-  //chiusur daspoi dopo tot secondi
+  //chiusur daspo dopo tot secondi
   if (daspo == true && testo == secondo_corrente - durata_daspo) {
     op = 0;
     daspo = false;
