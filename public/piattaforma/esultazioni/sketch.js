@@ -45,9 +45,8 @@ let j = 0; //sottomultiplo di i, ogni i è composto da 50 j
 let pulsazione = 0; //variabile per fare pulsare il cerchio della trombetta
 
 /////// variabili BONUS ////////////////////////////////////////////////////////////////////
-// se totale bonus apri un altra schermata
-let bonus_preso; //se i bonus sono tutti attivi apri un altra parte di sketch
-let contBonus; //conta quando p_coord arriva a 100
+let bonus_preso = 0; //se i bonus sono tutti attivi apri un altra parte di sketch
+let contBonus = 0; //conta quando p_coord arriva a 100
 
 ////////////////COMUNICAZIONE SERVER/////////////////////////////////////
 // RICEZIONE
@@ -58,21 +57,22 @@ socket.on("resetTimer", resetTifoSer);
 
 // UPDATE DA SERVER
 function updateTesto(dataReceived) {
-  console.log(dataReceived);
+//  console.log(dataReceived);
   testo = dataReceived //assegna a testo dati da server
 }
-
 // RICEZIONE BONUS
 socket.on("bonusIn", bonusServer);
 socket.on("bonusTotIn", bonusTotale_Ok);
 
 // UPDATE DA SERVER BONUS
-function bonusServer(dataReceived) {
-  contBonus = dataReceived; //assegna a contBonus dati da server
+function bonusServer(data1) {
+  console.log(data1 + ' bonus a caso');
+  contBonus = data1; //assegna a contBonus dati da server
 }
 
-function bonusTotale_Ok(dataReceived) {
-  bonus_preso = dataReceived; //assegna a contBonus dati da server
+function bonusTotale_Ok(data2) {
+  console.log(data2 + ' bonus tot ');
+  bonus_preso = data2; //assegna a contBonus dati da server
 }
 
 ////////////////FINE COMUNICAZIONE SERVER/////////////////////////////////////
@@ -116,6 +116,9 @@ function setup() {
 /////////////////////////////////////////////////////////////////////////////
 
 function draw() {
+  //EMIT BONUS
+    socket.emit("bonusOut", contBonus);
+    socket.emit("bonusTotOut", bonus_preso);
   background('#F9F9F9'); //chiaro
   imageMode(CENTER); //per pittogrammi
   noStroke();
@@ -153,29 +156,65 @@ function draw() {
   rect(w * 10 - width / 7, h * 45.5 - 7.5, xBarra, 15, 20);
   pop();
 
-  //pallini BONUS
+  ///////////////BONUS//////////////////////////////////////////////////////////////
+    //pallini BONUS
   for (let i = 0; i < 6; i++) {
     if (p_coord > 60) {
-      push();
-      fill('#877B85');
-      ellipse(w, h * 45.5, 15);
-      pop();
-      contBonus+=4;
+          contBonus+=4;
     }
 
-    if (contBonus === 24) {
-      contBonus = 0; //azzerare i bonus
-      bonus_preso = 1; //per dire che hai completato una fascia di bonus
-      window.open('../bonus-app12uomo/index.html', '_self'); //doppio puntino per andare nella cartella sopra
+//pallini BONUS
+    for (let i = 0; i < 6; i++) { // ogni 4 da il bonus
+      if (contBonus === 4 || contBonus === 5 || contBonus === 6 || contBonus === 7) {
+        push();
+        fill('#877B85');
+        ellipse(w, h * 45.5, 15);
+        pop();
+
+      } else if (contBonus === 8 || contBonus === 9 || contBonus === 10 || contBonus === 11) {
+        push();
+        fill('#877B85');
+        ellipse(w, h * 45.5, 15);
+        ellipse(w + 25, h * 45.5, 15);
+        pop();
+
+      } else if (contBonus === 12 || contBonus === 13 || contBonus === 14 || contBonus === 15) {
+        push();
+        fill('#877B85');
+        ellipse(w, h * 45.5, 15);
+        ellipse(w + 25, h * 45.5, 15);
+        ellipse(w + 50, h * 45.5, 15);
+        pop();
+
+      } else if (contBonus === 16 || contBonus === 17 || contBonus === 18 || contBonus === 19) {
+        push();
+        fill('#877B85');
+        ellipse(w, h * 45.5, 15);
+        ellipse(w + 25, h * 45.5, 15);
+        ellipse(w + 50, h * 45.5, 15);
+        ellipse(w + 75, h * 45.5, 15);
+        pop();
+
+      } else if (contBonus === 20 || contBonus === 21 || contBonus === 22 || contBonus === 23) {
+        push();
+        fill('#877B85');
+        ellipse(w, h * 45.5, 15);
+        ellipse(w + 25, h * 45.5, 15);
+        ellipse(w + 50, h * 45.5, 15);
+        ellipse(w + 75, h * 45.5, 15);
+        ellipse(w + 100, h * 45.5, 15);
+        pop();
+
+      } else if (contBonus === 24) {
+
+        contBonus = 0; //azzerare i bonus
+        bonus_preso = 1; //per dire che hai completato una fascia di bonus
+        window.open('../bonus-app12uomo/index.html', '_self'); //doppio puntino per andare nella cartella sopra
+      }
+
+      ellipse(w + s, h * 45.5, 15);
+      s = 25 * i;
     }
-
-    ellipse(w + s, h * 45.5, 15);
-    s = 25 * i;
-
-    //EMIT BONUS
-      socket.emit("bonusOut", contBonus);
-      socket.emit("bonusTotOut", bonus_preso);
-  }
 
   /////////////////// LA PARTE SOPRA è STANDARD ///////////////////////////////////////////////
 

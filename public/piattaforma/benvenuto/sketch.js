@@ -3,7 +3,7 @@ let socket = io(); //setting server
 
 let logoIcon, benvenuto, imm_condizioni;
 let b1, b2, button_text, testo_privacy, stadio;
-let imm1, imm2, imm3, imm4, strumenti;
+let imm1, imm2, imm3, imm4, strumenti, tut1, tut2, tut3;
 let w, h, s, xBarra, logor;
 let i = 0;
 let pag = 0;
@@ -13,10 +13,11 @@ let h1, h2;
 let divieto = 'ELOGIA IL CONTENIMENTO';
 let sotto_divieto1 = 'Mantenere gesti e volume controllati: non sarà necessario'
 let sotto_divieto2 = 'sbracciarsi o fare schiamazzi di alcun tipo.'
-let step = 'step 1/4';
+let step = 'step 1/3';
 
-let bonus_preso = 1;
-let contBonus = 12; //conta quando p_coord arriva a 100
+// let bonus_preso = 1;
+// let contBonus = 12; //conta quando p_coord arriva a 100
+
 // RICEZIONE BONUS
 socket.on("bonusIn", bonusServer);
 socket.on("bonusTotIn", bonusTotale_Ok);
@@ -41,7 +42,10 @@ function preload() {
   imm3 = loadImage("./assets/avversione.png");
   imm4 = loadImage("./assets/scaramanzia.png");
   testo_privacy = loadImage("./assets/testo.png");
-  strumenti = loadImage("./assets/ogg.png");
+  strumenti = loadImage("./assets/strumenti.png");
+  tut1 = loadImage("./assets/Tutorial_Trombetta2.gif");
+  tut2 = loadImage("./assets/Tutorial-sciarpa-su.gif");
+  tut3 = loadImage("./assets/barretteParola.gif");
 
 }
 
@@ -58,6 +62,10 @@ function setup() {
 
 /////////////////////////////////////////////////////////////////////////
 function draw() {
+  // //EMIT BONUS
+  //   socket.emit("bonusOut", contBonus);
+  //   socket.emit("bonusTotOut", bonus_preso);
+
   //CONTATORE i DEL TEMPO
   if (frameCount % 2 == 0) { //multiplo di 50 incrementa i
     i++;
@@ -66,9 +74,6 @@ function draw() {
   w = width / 20;
   h = height / 50;
 
-  //EMIT BONUS
-    socket.emit("bonusOut", contBonus);
-    socket.emit("bonusTotOut", bonus_preso);
 
   if (i > 1 && pag == 0) {
     background('#F9F9F9'); //chiaro
@@ -91,7 +96,7 @@ function draw() {
 
   ///////// BOTTONE //////////////////////////////////////////////////////////////////////////////////////////
 
-  if (i > 1) {
+  if (i > 1 ) {
     b1 = createButton(button_text);
     b1.position(w * 9, h * 42);
     b1.mousePressed(p);
@@ -99,7 +104,7 @@ function draw() {
   }
 
   ///////// PAG 0 //////////////////////////////////////////////////////////////////////////////////////////
-  if (pag > 0) {
+  if (pag > 0 && pag<=7) {
     background('#F9F9F9'); //chiaro
     b2 = createButton("");
     b2.position(w, h * 4.5);
@@ -123,7 +128,7 @@ function draw() {
     noStroke();
     rect(w * 10, h * 6, width / 3.5, 15, 20);
     //xBarra = ((width / 3.5) / 100) * p_coord; //altezza barra %, xTot= 439 = width / 3.5
-    xBarra = ((width / 3.5) / 100) * 25; //25%
+    xBarra = ((width / 3.5) / 100) * 33; //33%
     push();
     rectMode(CORNER);
     fill('#877B85'); //barra viola
@@ -235,7 +240,7 @@ function draw() {
     }
     h1 = 'Leggi e accetta';
     h2 = 'i termini e le condizioni';
-    step = ' step 1/4';
+    step = ' step 1/3';
     document.getElementById("container").style.display = 'none';
 
   } else if (pag == 5) { //////////////////////////////////////////////// PRIVACY FINALE
@@ -252,8 +257,8 @@ function draw() {
       b1.style('background-color', '#d6d1d3');
       b1.style('cursor', 'not-allowed');
     }
-    step = ' step 2/4';
-    xBarra = ((width / 3.5) / 100) * 50;
+    step = ' step 2/3';
+    xBarra = ((width / 3.5) / 100) * 66;//66%
     push();
     rectMode(CORNER);
     fill('#877B85'); //4° colore PALETTE
@@ -265,33 +270,20 @@ function draw() {
     document.getElementById("container").style.display = 'flex';
     pop();
 
-
-
   } else if (pag == 6) { //////////////////////////////////////////////// STRUMENTI DEL TIFO
     document.getElementById("container").style.display = 'none';
-    document.getElementById("forum").style.display = 'none';
-    document.getElementById("schermo").style.display = 'none';
     button_text = 'Avanti';
     h1 = 'Ecco gli strumenti';
     h2 = 'per tifare';
-    step = ' step 3/4';
-    image(strumenti, w * 10, height / 50 * 28, strumenti.width / 1.5, strumenti.height / 1.5);
-    xBarra = ((width / 3.5) / 100) * 75;
-    push();
-    rectMode(CORNER);
-    fill('#877B85'); //4° colore PALETTE
-    rect(w * 10 - width / 7, h * 6 - 7.5, xBarra, 15, 20);
-    textSize(12);
-    text(step, w * 10, h * 10);
-    pop();
+    step = ' step 3/3';
+    image(strumenti, w * 10, height / 50 * 29, strumenti.width / 1.5, strumenti.height / 1.5);//cornice strumenti
 
-  } else if (pag == 7) { /////////////////////////////////////////////////// CODICE PARTITA
-      document.getElementById("forum").style.display = 'block';
-      document.getElementById("schermo").style.display = 'block';
-    button_text = 'Inizia';
-    h1 = 'Inserisci il codice';
-    h2 = 'per accedere allo stadio';
-    step = ' step 4/4';
+    image(tut1, w * 10, height / 50 * 27, tut1.width / 5.5, tut1.height /5.5);//cornice strumenti
+    image(tut2, w * 7.5, height / 50 * 27, tut2.width / 5.5, tut2.height /5.5);//cornice strumenti
+    image(tut3, w * 12.5, height / 50 * 27, tut3.width / 5.5, tut3.height /5.5);//cornice strumenti
+    tut1.reset();
+      tut2.reset();
+
     xBarra = ((width / 3.5) / 100) * 100;
     push();
     rectMode(CORNER);
@@ -301,16 +293,15 @@ function draw() {
     text(step, w * 10, h * 10);
     pop();
 
-  } else if (pag == 8) { //stadio////////////////////////////////////////////////// STADIO INGRESSO
-    document.getElementById("forum").style.display = 'none';
-    document.getElementById("schermo").style.display = 'none';
+  } else if (pag == 7) { //////////////////////////////////////////////// STADIO INGRESSO
+
     button_text = 'Inizia';
     h1 = 'Unisciti';
     h2 = 'agli altri tifosi';
     step = '';
-    xBarra = ((width / 4.5) / 100) * 60;
-    image(stadio, w * 10, h * 26, stadio.width / 2, stadio.height / 2);
-    rect(w * 10, h * 36, width / 4.5, 15, 20); //barra grigia in basso
+    xBarra = ((width / 6) / 100) * 65;
+    image(stadio, w * 10, h * 25, stadio.width / 1.9, stadio.height / 1.9);
+    rect(w * 10, h * 34, width / 6, 12, 20); //barra grigia in basso
 
 
     fill('#F9F9F9'); //bianca
@@ -319,16 +310,16 @@ function draw() {
     push();
     rectMode(CORNER);
     fill('#877B85');
-    rect(w * 10 - width / 9, h * 36 - 7.5, xBarra, 15, 20); //barra in basso
+    rect(w * 10 - width /12, h * 34 - 6, xBarra, 12, 20); //barra in basso
+    textSize(14);
+    text('60%', w * 10, h * 32);
+
     textSize(12);
     text(step, w * 10, h * 10);
-    textSize(14);
     fill('#D5D0D3'); // grigia
-    text('60%', w * 10, h * 34);
-    text('INIZIA UNA VERA ESPERIENZA DI TIFO', w * 10, h * 39);
+    text('UNA VERA ESPERIENZA DI TIFO', w * 10, h * 40);
     pop();
-  } else if (pag == 9) {
-    background('#887b86'); //scuro
+  } else if (pag == 8) {
     window.open('../indexPausa.html', '_self');
   }
 }
@@ -347,7 +338,11 @@ function q() {
 }
 
 function back() {
-  pag--;
+  if (pag<=0 ) {
+    window.open('../index.html', '_self');
+  } else if(pag>0){
+      pag--;
+  }
 }
 
 /////////////////////////////////////////////////////////////////////////////

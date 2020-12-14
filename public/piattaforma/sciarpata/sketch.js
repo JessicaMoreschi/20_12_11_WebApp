@@ -23,10 +23,8 @@ let pronto //coordinzaione tutorial
 
 
 // variabili BONUS ////////////////////////////////////////////////////////////////////
-// se totale bonus apri un altra schermata
-let bonus_preso; //se i bonus sono tutti attivi apri un altra parte di sketch
-let contBonus; //conta quando p_coord arriva a 100
-
+let bonus_preso = 0; //se i bonus sono tutti attivi apri un altra parte di sketch
+let contBonus = 0; //conta quando p_coord arriva a 100
 
 
 //variabili per DASPO
@@ -90,7 +88,7 @@ socket.on("resetTimer", resetTifoSer);
 
 // UPDATE DA SERVER
 function updateTesto(dataReceived) {
-  console.log(dataReceived);
+//  console.log(dataReceived);
   testo = dataReceived //assegna a testo dati da server
 }
 
@@ -99,13 +97,16 @@ socket.on("bonusIn", bonusServer);
 socket.on("bonusTotIn", bonusTotale_Ok);
 
 // UPDATE DA SERVER BONUS
-function bonusServer(dataReceived) {
-  contBonus = dataReceived; //assegna a contBonus dati da server
+function bonusServer(data1) {
+  console.log(data1 + ' bonus a caso');
+  contBonus = data1; //assegna a contBonus dati da server
 }
 
-function bonusTotale_Ok(dataReceived) {
-  bonus_preso = dataReceived; //assegna a contBonus dati da server
+function bonusTotale_Ok(data2) {
+  console.log(data2 + ' bonus tot ');
+  bonus_preso = data2; //assegna a contBonus dati da server
 }
+
 ////////////////FINE COMUNICAZIONE SERVER/////////////////////////////////////
 
 
@@ -145,6 +146,10 @@ function setup() {
 
 /////////////////////////////////////////////////////////////////////////
 function draw() {
+
+  //EMIT BONUS
+    socket.emit("bonusOut", contBonus);
+    socket.emit("bonusTotOut", bonus_preso);
 
   //CONTATORE i DEL TEMPO
   j++;
@@ -256,10 +261,6 @@ function draw() {
 
     ellipse(w + s, h * 45.5, 15);
     s = 25 * i;
-
-    //EMIT BONUS
-    socket.emit("bonusOut", contBonus);
-    socket.emit("bonusTotOut", bonus_preso);
   }
   ///////////////////////////////////////////////////////////////
 

@@ -7,6 +7,9 @@ var gap; //gap tra countDown e Now
 var runningTime = 180; //secondi che scorrono
 var thisTime = 180; //secondi allo stopTimer
 var testo = 180; //variabile testo this countdown
+var bonus_preso = 1;
+var contBonus = 20; //conta quando p_coord arriva a 100
+
 
 var playAllVideo = false; //bouleana play/stop countdown
 let videoAction;
@@ -52,6 +55,10 @@ function draw() {
 
 //EMIT COUNTDOWN
   socket.emit("testoOut", testo);
+  //EMIT BONUS
+    socket.emit("bonusOut", contBonus);
+    socket.emit("bonusTotOut", bonus_preso);
+
 
 // DISPLAY VIDEO
   if (testo < videoActionStart && testo > videoActionStop) {
