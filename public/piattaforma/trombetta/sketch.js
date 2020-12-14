@@ -33,9 +33,13 @@ let pronto //coordinzaione tutorial
 let daspo = false; //variabile che dice se daspo è attiva in questo momento
 let daspo_counter = 0; //variabile che conta il numero di daspo
 let op = 0; //opacità rettangolo daspo
-let timeout_daspo; //variabile per riavviare la funzione Timeout del daspo
-let daspo_3, daspo_4, daspo_5;
-let gif_daspo;
+let daspo_gif_3, daspo_gif_4, daspo_gif_5;
+let durata_daspo = 0; //durata della daspo
+let secondo_corrente = 0; //secondo dell'inizio daspo
+
+
+let j = 0; //sottomultiplo di i, ogni i è composto da 50 j
+let pulsazione = 0; //variabile per fare pulsare il cerchio della trombetta
 
 // variabili BONUS ////////////////////////////////////////////////////////////////////
 // se totale bonus apri un altra schermata
@@ -51,7 +55,7 @@ socket.on("resetTimer", resetTifoSer);
 
 // UPDATE DA SERVER
 function updateTesto(dataReceived) {
-//  console.log(dataReceived);
+  //  console.log(dataReceived);
   testo = dataReceived //assegna a testo dati da server
 }
 
@@ -79,9 +83,9 @@ function preload() {
   tut2Icon = loadImage("./assets/immagini/Tutorial_Trombetta2.gif"); //trombetta tutorial 1
   logor = loadImage("./assets/immagini/logopiccolo.png"); //logo ridotto
   freccia = loadImage("./assets/immagini/freccia.png");
-  daspo_3 = loadImage("./assets/immagini/daspo3.gif");
-  daspo_4 = loadImage("./assets/immagini/daspo4.gif");
-  daspo_5 = loadImage("./assets/immagini/daspo5.gif");
+  // daspo_3 = loadImage("./assets/immagini/daspo3.gif");
+  // daspo_4 = loadImage("./assets/immagini/daspo4.gif");
+  // daspo_5 = loadImage("./assets/immagini/daspo5.gif");
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -178,7 +182,7 @@ function draw() {
       ellipse(w + 25, h * 45.5, 15);
       pop();
 
-    } else if (contBonus === 12 || contBonus === 13 || contBonus === 14 || contBonus === 15 ) {
+    } else if (contBonus === 12 || contBonus === 13 || contBonus === 14 || contBonus === 15) {
       push();
       fill('#877B85');
       ellipse(w, h * 45.5, 15);
@@ -186,7 +190,7 @@ function draw() {
       ellipse(w + 50, h * 45.5, 15);
       pop();
 
-    } else if (contBonus === 16 || contBonus === 17 || contBonus === 18 || contBonus === 19 ) {
+    } else if (contBonus === 16 || contBonus === 17 || contBonus === 18 || contBonus === 19) {
       push();
       fill('#877B85');
       ellipse(w, h * 45.5, 15);
@@ -214,14 +218,16 @@ function draw() {
     s = 25 * i;
 
     //EMIT BONUS
-      socket.emit("bonusOut", contBonus);
-      socket.emit("bonusTotOut", bonus_preso); ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    socket.emit("bonusOut", contBonus);
+    socket.emit("bonusTotOut", bonus_preso); ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   }
   ///////////////////////////////////////////////////////////////
 
   //CONTATORE i DEL TEMPO
+  j++;
   if (frameCount % 50 == 0) { //multiplo di 50 incrementa i
     i++;
+    j = 0;
   }
 
   // BARRETTE FEED UTENTE (LINETTE)
@@ -229,6 +235,7 @@ function draw() {
     if (keyIsDown(ENTER)) {
       alt = 1 * random(1, 8.5);
       input_utente = 200;
+      pulsazione=0;
     } else {
       alt = 1;
       input_utente = 0;
@@ -258,6 +265,20 @@ function draw() {
   fill('#B7AEB5'); //3 PALETTE
   //ICONA FEEDBACK DA SEGUIRE
   if (i % 2 != 0 && i > 5) {
+
+    if (j == 0 || j == 25 || j == 50) { //pulsazioni del cerchio
+      pulsazione = 0
+    } else if (j < 12 || j > 25 && j < 37) {
+      pulsazione += 4;
+    } else if (j > 12 && j < 25 || j > 37 && j < 50) {
+      pulsazione -= 4;
+    }
+    push()
+    noStroke()
+    fill("#E5E5E5")
+    ellipse(width / 2, height / 2, 100 + pulsazione)
+    pop()//fine puslazioni cerchio
+
     push();
     fill('#877B85');
     noStroke();
@@ -307,27 +328,74 @@ function draw() {
     }
   }
 
-  //DASPO
+  //////DASPO
+
   //daspo condizione
-  if (keyIsDown(ENTER) && i % 2 == 0 && i > 5) {
+  if (keyIsDown(ENTER) && i % 2 == 0 && i > 5 && j > 10 && daspo == false) {
     daspo = true;
     daspo_counter++;
-  } else if (keyIsDown(ENTER) && i % 2 != 0 && i > 5 && daspo != true) {
-    daspo = false;
-    op = 0;
+    secondo_corrente = testo;
   }
 
-  //attivare funzioni daspo
+  //rettangolo in poacità per la daspo
+  push();
+  rectMode(CORNER);
+  fill(255, 255, 255, op);
+  rect(0, 0, width, height);
+  pop();
+
+  //gif diverse per durate diverse
+  if (!daspo_gif_3) {
+    daspo_gif_3 = createImg("./assets/immagini/daspo3.gif");
+    daspo_gif_3.hide();
+  }
+
+  if (!daspo_gif_4) {
+    daspo_gif_4 = createImg("./assets/immagini/daspo4.gif");
+    daspo_gif_4.hide();
+  }
+
+  if (!daspo_gif_5) {
+    daspo_gif_5 = createImg("./assets/immagini/daspo5.gif");
+    daspo_gif_5.hide();
+  }
+
+  //quando daspo==true fa partire la daspo giusta in base al numero di daspo
   if (daspo == true) {
-    daspoAttiva();
+    op = 210;
+    alt = 1;
+
+    if (daspo_counter == 1) {
+      durata_daspo = 3;
+      daspo_gif_3.show();
+      daspo_gif_3.size(150, AUTO);
+      daspo_gif_3.position(width / 20, 3 * height / 4);
+    } else if (daspo_counter == 2) {
+      durata_daspo = 4;
+      daspo_gif_4.show();
+      daspo_gif_4.size(150, AUTO);
+      daspo_gif_4.position(width / 20, 3 * height / 4);
+    } else if (daspo_counter > 2) {
+      durata_daspo = 5;
+      daspo_gif_5.show();
+      daspo_gif_5.size(150, AUTO);
+      daspo_gif_5.position(width / 20, 3 * height / 4);
+    }
   }
 
-  incremento_daspo = 3000 + daspo_counter * 1000;
-  if (incremento_daspo > 5000) {
-    incremento_daspo = 5000;
+  //chiusur daspoi dopo tot secondi
+  if (daspo == true && testo == secondo_corrente - durata_daspo) {
+    op = 0;
+    daspo = false;
+    if (daspo_counter == 1) {
+      daspo_gif_3.hide();
+    } else if (daspo_counter == 2) {
+      daspo_gif_4.hide();
+    } else if (daspo_counter > 2) {
+      daspo_gif_5.hide();
+    }
   }
 
-  console.log("tempo daspo " + incremento_daspo)
 
   ///////cambio cartella //////////////////////////////////////////////////
   if (i == 30) {
@@ -335,45 +403,9 @@ function draw() {
   }
   //////////////////////////////////////////////////////////////////
 
-
 }
 ///////FINE DRAW/////////////////
 
-//funzioni per attivare la daspo
-function daspoAttiva() {
-  op = 210;
-  alt = 1;
-
-  push();
-  rectMode(CORNER);
-  fill(255, 255, 255, op);
-  rect(0, 0, width, height);
-  pop();
-
-  if (incremento_daspo == 3000) {
-    gif_daspo = daspo_3
-  } else if (incremento_daspo == 4000) {
-    gif_daspo = daspo_4
-  } else if (incremento_daspo == 5000) {
-    gif_daspo = daspo_5
-  }
-
-
-  // image(gif_daspo, width / 10, 3*height / 4, gif_daspo.width/2 , gif_daspo.height/2 );
-  image(daspo_3, width / 10, 3 * height / 4, daspo_3.width / 2, daspo_3.height / 2);
-
-  timeout_daspo = setTimeout(daspoNonAttiva, 3000);
-}
-
-//funzione per disattivare la daspo cambiando la variabile
-function daspoNonAttiva() {
-  daspo = false;
-}
-
-//riavvia il timer per daspo
-function nonAttivafine() {
-  clearTimeout(timeout_daspo);
-}
 
 
 // function SERIAL
