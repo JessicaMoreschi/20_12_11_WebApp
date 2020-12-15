@@ -24,7 +24,7 @@ let p_coord = 0; //var coordinazione
 
 
 let feed_piattaforma = 0; //var piattaforma: quando alt!=1 viene incrementata
-let input_utente = 200 //var utente usa la trobetta, preme bottone
+let input_utente; //var utente usa la trobetta, preme bottone
 
 let opacità = 210 //opacità rettangolo tutorial
 let pronto //coordinzaione tutorial
@@ -225,7 +225,7 @@ function draw() {
 
   //CONTATORE i DEL TEMPO
   j++;
-  if (frameCount % 50 == 0) { //multiplo di 50 incrementa i
+  if (frameCount % 40 == 0) { //multiplo di 50 incrementa i
     i++;
     j = 0;
   }
@@ -234,7 +234,7 @@ function draw() {
   for (var x = w * 3.8; x < w * 8.8; x += 40) {
     if (keyIsDown(ENTER)) {
       alt = 1 * random(1, 8.5);
-      input_utente = 200;
+      input_utente = 250;
       pulsazione=0;
     } else {
       alt = 1;
