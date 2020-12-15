@@ -17,7 +17,7 @@ let bButtonColorD = '#F9F9F9';
 let bButtonColorC = '#F9F9F9';
 
 //icone
-let baloonIcon, baloon_Puntini, noParola, logor, freccia;
+let baloonIcon, baloon_Puntini, noParola, logor;
 let xBarra = 20; //lunghezza barra %
 let w, h; //posizione
 let s = 0; //ellisse BONUS
@@ -84,7 +84,6 @@ function preload() {
   baloon_Puntini = loadImage("./assets/scuro.gif"); //nuvoletta pensa
   noParola = loadImage("./assets/noParola.png"); //nuvoletta attiva
   logor = loadImage("./assets/logopiccolo.png") //logo ridotto
-  freccia = loadImage("./assets/freccia.png");
   // daspo_3 = loadImage("./assets/daspo3.gif");
   // daspo_4 = loadImage("./assets/daspo4.gif");
   // daspo_5 = loadImage("./assets/daspo5.gif");
