@@ -28,7 +28,20 @@ var myCanvas
 socket.on("startTimer", startTimer); // StartTimer
 socket.on("stopTimer", stopTimer); // StopTimer
 socket.on("resetTimer", resetTimer); // ResetTimer
+// RICEZIONE BONUS
+socket.on("bonusIn", bonusServer);
+socket.on("bonusTotIn", bonusTotale_Ok);
 
+// UPDATE DA SERVER BONUS
+function bonusServer(data1) {
+//  console.log(data1 + ' bonus a caso');
+   contBonus= data1; //assegna a contBonus dati da server
+}
+
+function bonusTotale_Ok(data2) {
+//  console.log(data2 + ' bonus tot ');
+  bonus_preso = data2; //assegna a contBonus dati da server
+}
 
 function setup() {
   myCanvas = createCanvas(windowWidth/100*49.5, windowHeight/100*49.5);
