@@ -80,8 +80,8 @@ function bonusTotale_Ok(data2) {
 function preload() {
   trombaIcon = loadImage("./assets/immagini/trombettaB.png"); //trombetta chiara
   tscuraIcon = loadImage("./assets/immagini/trombetta.png"); //trombetta scura
-  tut1Icon = loadImage("./assets/immagini/Tutorial_Trombetta1.png"); //trombetta tutorial 1
-  tut2Icon = loadImage("./assets/immagini/Tutorial_Trombetta2.gif"); //trombetta tutorial 1
+  tut1Icon = loadImage("./assets/immagini/Tutorial_T1.png"); //trombetta tutorial 1
+  tut2Icon = loadImage("./assets/immagini/Tutorial_T2.gif"); //trombetta tutorial 1
   logor = loadImage("./assets/immagini/logopiccolo.png"); //logo ridotto
   freccia = loadImage("./assets/immagini/freccia.png");
   // daspo_3 = loadImage("./assets/immagini/daspo3.gif");
