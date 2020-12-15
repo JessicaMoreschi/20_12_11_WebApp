@@ -12,7 +12,7 @@ let portName = '/dev/tty.usbmodem14101'; // fill in your serial port name here
 let inData; // for incoming serial data
 
 //trombetta ICONE
-let trombaIcon, tscuraIcon, tut1Icon, tut2Icon, logor, freccia; //icone
+let trombaIcon, tscuraIcon, tut1Icon, tut2Icon, logor; //icone
 let xBarra = 20; //lunghezza barra %
 let w, h; //posizione
 let s = 0; //ellisse BONUS
@@ -83,7 +83,6 @@ function preload() {
   tut1Icon = loadImage("./assets/immagini/Tutorial_T1.png"); //trombetta tutorial 1
   tut2Icon = loadImage("./assets/immagini/Tutorial_T2.gif"); //trombetta tutorial 1
   logor = loadImage("./assets/immagini/logopiccolo.png"); //logo ridotto
-  freccia = loadImage("./assets/immagini/freccia.png");
   // daspo_3 = loadImage("./assets/immagini/daspo3.gif");
   // daspo_4 = loadImage("./assets/immagini/daspo4.gif");
   // daspo_5 = loadImage("./assets/immagini/daspo5.gif");

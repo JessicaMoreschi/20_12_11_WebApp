@@ -5,7 +5,7 @@ let socket = io(); //setting server
 var testo = 180; //valore countdown
 
 //trombetta ICONE
-let sciarpaIcon, sciarpaBIcon, tut1Icon, tutIcon, logor, freccia, sAlta, sBassa; //icone
+let sciarpaIcon, sciarpaBIcon, logor, sAlta, sBassa; //icone
 let xBarra = 20; //lunghezza barra %
 let w, h; //posizione
 let s = 0; //ellisse BONUS
@@ -113,10 +113,7 @@ function bonusTotale_Ok(data2) {
 function preload() {
   sciarpaBIcon = loadImage("./assets/immagini/sciarpa.png"); //sciarpa vuota bianca
   sciarpaIcon = loadImage("./assets/immagini/sciarpaViola.png"); //sciarpa scura
-  tutIcon = loadImage("./assets/immagini/Tutorial-sciarpa-giu.gif");
-  tut1Icon = loadImage("./assets/immagini/Tutorial-sciarpa-su.gif");
   logor = loadImage("./assets/immagini/logopiccolo.png"); //logo ridotto
-  freccia = loadImage("./assets/immagini/freccia.png");
   sAlta = loadImage("./assets/immagini/Sciarpa_su.png");
   sBassa = loadImage("./assets/immagini/Sciarpa_giù.png");
   //   daspo_3 = loadImage("./assets/immagini/daspo3.gif");
@@ -323,7 +320,7 @@ function draw() {
   if ((i == 0 || i == 2) & (boulPausa == false)) {
 
     document.getElementById("tutorial").style.display = "block";
-    document.getElementById("tutorial2").src = "./assets/immagini/Tutorial-sciarpa-giu.gif";
+    document.getElementById("tutorial2").src = "./assets/immagini/Tutorial_S-giu.gif";
     document.getElementById("tutorial2").style.display = "none";
     text('Alzala quando richiesto', w * 10, h * 29.5);
     if (topPrediction == 'up') {
@@ -331,7 +328,7 @@ function draw() {
       p_coord = 70;
     }
   } else if ((i == 1 || i == 3) & (boulPausa == false)) {
-    document.getElementById("tutorial").src = "./assets/immagini/Tutorial-sciarpa-su.gif";
+    document.getElementById("tutorial").src = "./assets/immagini/Tutorial_S-su.gif";
     document.getElementById("tutorial2").style.display = "block";
     document.getElementById("tutorial").style.display = "none";
 
