@@ -7,8 +7,10 @@ var gap; //gap tra countDown e Now
 var runningTime = 180; //secondi che scorrono
 var thisTime = 180; //secondi allo stopTimer
 var testo = 180; //variabile testo this countdown
-var bonus_preso = 0;
-var contBonus =12; //conta quando p_coord arriva a 100
+
+
+var bonus_preso = 1;
+var contBonus = 12; //conta quando p_coord arriva a 100
 
 
 var playAllVideo = false; //bouleana play/stop countdown
@@ -28,9 +30,13 @@ var myCanvas
 socket.on("startTimer", startTimer); // StartTimer
 socket.on("stopTimer", stopTimer); // StopTimer
 socket.on("resetTimer", resetTimer); // ResetTimer
-// // RICEZIONE BONUS
-// socket.on("bonusIn", bonusServer);
-// socket.on("bonusTotIn", bonusTotale_Ok);
+// RICEZIONE BONUS
+ socket.on("bonusIn", bonus_server);
+
+ function bonus_server(data){
+     contBonus = data.bonus;
+     bonus_preso = data.b_tot;
+   }
 
 function setup() {
   myCanvas = createCanvas(windowWidth/100*49.5, windowHeight/100*49.5);
@@ -57,10 +63,13 @@ function draw() {
 
 //EMIT COUNTDOWN
   socket.emit("testoOut", testo);
-  //EMIT BONUS
-    socket.emit("bonusOut", contBonus);
-    socket.emit("bonusTotOut", bonus_preso);
-
+  
+//EMIT BONUS
+  let message = {
+    bonus: contBonus,
+    b_tot: bonus_preso,
+  }
+    socket.emit("bonusOut",message);
 
 // DISPLAY VIDEO
   if (testo < videoActionStart && testo > videoActionStop) {

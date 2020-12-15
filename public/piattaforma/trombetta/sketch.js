@@ -4,6 +4,11 @@ let socket = io(); //setting server
 //Coundown
 var testo = 180; //valore countdown
 
+// variabili BONUS /
+let bonus_preso = 1;
+let contBonus = 4;
+//let contBonusSever;
+
 // let SERIAL
 let serial; // variable to hold an instance of the serialport library
 let portName = '/dev/tty.usbmodem14101'; // fill in your serial port name here
@@ -41,11 +46,7 @@ let secondo_corrente = 0; //secondo dell'inizio daspo
 let j = 0; //sottomultiplo di i, ogni i è composto da 50 j
 let pulsazione = 0; //variabile per fare pulsare il cerchio della trombetta
 
-// variabili BONUS ////////////////////////////////////////////////////////////////////
-// se totale bonus apri un altra schermata
-let bonus_preso = 0; //se i bonus sono tutti attivi apri un altra parte di sketch
-let contBonus = 0; //conta quando p_coord arriva a 100
-let contBonusSever;
+
 ////////////////COMUNICAZIONE SERVER/////////////////////////////////////
 // RICEZIONE
 socket.on("testoIn", updateTesto); //ricezione countdown
@@ -55,25 +56,15 @@ socket.on("resetTimer", resetTifoSer);
 
 // UPDATE DA SERVER
 function updateTesto(dataReceived) {
-  //  console.log(dataReceived);
   testo = dataReceived //assegna a testo dati da server
 }
-
 // RICEZIONE BONUS
-socket.on("bonusIn", bonusServer);
-socket.on("bonusTotIn", bonusTotale_Ok);
+ socket.on("bonusIn", bonus_server);
 
-// UPDATE DA SERVER BONUS
-function bonusServer(data1) {
-//  console.log(data1 + ' bonus a caso');
-   contBonusSever = data1; //assegna a contBonus dati da server
-}
-
-function bonusTotale_Ok(data2) {
-//  console.log(data2 + ' bonus tot ');
-  bonus_preso = data2; //assegna a contBonus dati da server
-}
-
+ function bonus_server(data){
+     contBonus = data.bonus;
+     bonus_preso = data.b_tot;
+   }
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -83,9 +74,6 @@ function preload() {
   tut1Icon = loadImage("./assets/immagini/Tutorial_T1.png"); //trombetta tutorial 1
   tut2Icon = loadImage("./assets/immagini/Tutorial_T2.gif"); //trombetta tutorial 1
   logor = loadImage("./assets/immagini/logopiccolo.png"); //logo ridotto
-  // daspo_3 = loadImage("./assets/immagini/daspo3.gif");
-  // daspo_4 = loadImage("./assets/immagini/daspo4.gif");
-  // daspo_5 = loadImage("./assets/immagini/daspo5.gif");
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -113,7 +101,7 @@ function setup() {
   b2.position(w, h * 4.5);
   b2.mousePressed(dispPausa);
   b2.id('pauseBtn');
-  contBonus = contBonusSever;
+  //contBonus = contBonusSever;
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -163,12 +151,14 @@ function draw() {
 
   if (p_coord === 80) {
     contBonus++;
-  }
-
-  console.log('BONUS CONTATOR:' + contBonus);
   //EMIT BONUS
-  socket.emit("bonusOut", contBonus);
-  socket.emit("bonusTotOut", bonus_preso);
+      let message = {
+        bonus: contBonus,
+        b_tot: bonus_preso,
+      }
+        socket.emit("bonusOut",message);
+  }
+  console.log('BONUS CONTATOR:' + contBonus);
 
   //pallini BONUS
   for (let i = 0; i < 6; i++) { // ogni 4 da il bonus
