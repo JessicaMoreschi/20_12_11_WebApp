@@ -237,6 +237,7 @@ button{
   width: auto;
   height: 50%;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 #x{
