@@ -265,7 +265,7 @@ function draw() {
   fill('#B7AEB5'); //3 PALETTE
 
   //ICONA FEEDBACK DA SEGUIRE
-  if (i % 2 != 0 && i > 5) {
+  if (i % 2 != 0 && i > 3) {
 
     if (j == 0 || j == 25 || j == 50) { //pulsazioni del cerchio
       pulsazione = 0
@@ -288,7 +288,7 @@ function draw() {
     image(trombaIcon, width / 2, height / 2, trombaIcon.width / 1.7, trombaIcon.height / 1.7);
     pop();
     feed_piattaforma++;
-  } else if (i % 2 == 0 && i > 5) { //cambio colore delle bottone centrale: feedback utente
+  } else if (i % 2 == 0 && i > 3) { //cambio colore delle bottone centrale: feedback utente
     push();
     fill('#F9F9F9');
     stroke('#877B85');
@@ -305,13 +305,13 @@ function draw() {
   fill(255, 255, 255, opacità);
   rect(0, 0, width, height);
   //rettangolo diventta trasparente alla fine del tutorial
-  if (i > 5) {
+  if (i > 3) {
     opacità = 0
   }
   pop();
 
   //TUTORIAL TROMBETTA + TESTI GIUSTO/SBAGLATO
-  if (i == 0 || i == 2 || i == 4) {
+  if (i == 0 || i == 2 ) {
     image(tut1Icon, w * 10, h * 24.5, tut1Icon.width / 5.5, tut1Icon.height / 5.5);
     tut2Icon.reset();
     text('Segui il ritmo degli altri', w * 10, h * 31);
@@ -319,7 +319,7 @@ function draw() {
     if (keyIsDown(ENTER)) {
       text('NON COORDINATO', w * 10, h * 33);
     }
-  } else if (i == 1 || i == 3 || i == 5) {
+  } else if (i == 1 || i == 3) {
     image(tut2Icon, w * 10, h * 24.5, tut2Icon.width / 5.5, tut2Icon.height / 5.5);
     text('Segui il ritmo degli altri', w * 10, h * 31);
     let pronto = true;
@@ -399,7 +399,7 @@ function draw() {
 
 
   ///////cambio cartella //////////////////////////////////////////////////
-  if (i == 30) {
+  if (i == 15) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   }
   //////////////////////////////////////////////////////////////////
