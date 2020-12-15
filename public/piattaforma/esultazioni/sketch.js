@@ -4,6 +4,10 @@ let socket = io(); //setting server
 //Coundown
 var testo = 180; //valore countdown
 
+// variabili BONUS ///
+let bonus_preso = 0;
+let contBonus = 0;
+
 //impostazioni riconoscimento vocale
 let lang = 'it-IT';
 let speechRec = new p5.SpeechRec(lang, gotSpeech);
@@ -44,11 +48,6 @@ let secondo_corrente = 0; //secondo dell'inizio daspo
 let j = 0; //sottomultiplo di i, ogni i è composto da 50 j
 let pulsazione = 0; //variabile per fare pulsare il cerchio della trombetta
 
-/////// variabili BONUS ////////////////////////////////////////////////////////////////////
-let bonus_preso = 0; //se i bonus sono tutti attivi apri un altra parte di sketch
-let contBonus = 0; //conta quando p_coord arriva a 100
-let contBonusSever;
-
 ////////////////COMUNICAZIONE SERVER/////////////////////////////////////
 // RICEZIONE
 socket.on("testoIn", updateTesto); //ricezione countdown
@@ -58,26 +57,17 @@ socket.on("resetTimer", resetTifoSer);
 
 // UPDATE DA SERVER
 function updateTesto(dataReceived) {
-  //  console.log(dataReceived);
   testo = dataReceived //assegna a testo dati da server
 }
 // RICEZIONE BONUS
-socket.on("bonusIn", bonusServer);
-socket.on("bonusTotIn", bonusTotale_Ok);
+ socket.on("bonusIn", bonus_server);
 
-// UPDATE DA SERVER BONUS
-function bonusServer(data1) {
-  //  console.log(data1 + ' bonus a caso');
-  contBonusSever = data1; //assegna a contBonus dati da server
-}
-
-function bonusTotale_Ok(data2) {
-  console.log(data2 + ' bonus tot ');
-  bonus_preso = data2; //assegna a contBonus dati da server
-}
+ function bonus_server(data){
+     contBonus = data.bonus;
+     bonus_preso = data.b_tot;
+   }
 
 ////////////////FINE COMUNICAZIONE SERVER/////////////////////////////////////
-
 
 function preload() {
   baloonIcon = loadImage("./assets/feed_parla.gif"); //nuvoletta attiva
@@ -111,16 +101,11 @@ function setup() {
   b2.position(w, h * 4.5);
   b2.mousePressed(dispPausa);
   b2.id('pauseBtn');
-  contBonus = contBonusSever;
 }
 
 /////////////////////////////////////////////////////////////////////////////
 
 function draw() {
-  //EMIT BONUS
-  socket.emit("bonusOut", contBonus);
-  socket.emit("bonusTotOut", bonus_preso);
-
   background('#F9F9F9'); //chiaro
   imageMode(CENTER); //per pittogrammi
   noStroke();
@@ -160,11 +145,17 @@ function draw() {
 
   ///////////////BONUS//////////////////////////////////////////////////////////////
   //pallini BONUS
-  for (let i = 0; i < 6; i++) {
+
     if (p_coord > 60) {
       contBonus += 4;
+  //EMIT BONUS
+        let message = {
+          bonus: contBonus,
+          b_tot: bonus_preso,
+        }
+          socket.emit("bonusOut",message);
     }
-}
+
     //pallini BONUS
     for (let i = 0; i < 6; i++) { // ogni 4 da il bonus
       if (contBonus === 4 || contBonus === 5 || contBonus === 6 || contBonus === 7) {

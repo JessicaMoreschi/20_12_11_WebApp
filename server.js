@@ -28,13 +28,10 @@ function newConnection(socket) {
     socket.broadcast.emit("resetTimer")
   });
 
-  socket.on("bonusOut", function(dataReceived) {
+  socket.on("bonusOut", function(dataReceived) { //bonus
     socket.broadcast.emit("bonusIn", dataReceived)
   });
 
-  socket.on("bonusTotOut", function(dataReceived) { // stop timer
-    socket.broadcast.emit("bonusTotIn", dataReceived)
-  });
 
   //* aggiungi qui i messaggi per farli rimbalzare a tutti
 }

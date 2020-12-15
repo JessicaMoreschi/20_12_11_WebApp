@@ -4,6 +4,10 @@ let socket = io(); //setting server
 //Coundown
 var testo = 180; //valore countdown
 
+// variabili BONUS //
+let bonus_preso = 0;
+let contBonus = 0;
+
 //trombetta ICONE
 let sciarpaIcon, sciarpaBIcon, logor, sAlta, sBassa; //icone
 let xBarra = 20; //lunghezza barra %
@@ -21,12 +25,6 @@ let input_utente = 200 //var utente usa la trobetta, preme bottone
 let opacità = 210 //opacità rettangolo tutorial
 let pronto //coordinzaione tutorial
 
-
-// variabili BONUS ////////////////////////////////////////////////////////////////////
-let bonus_preso = 0; //se i bonus sono tutti attivi apri un altra parte di sketch
-let contBonus = 0; //conta quando p_coord arriva a 100
-let contBonusSever;
-
 //variabili per DASPO
 let daspo = false; //variabile che dice se daspo è attiva in questo momento
 let daspo_counter = 0; //variabile che conta il numero di daspo
@@ -42,8 +40,6 @@ let boulPausa = false;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // teachable machine
-// https://www.npmjs.com/package/@teachablemachine/pose/v/0.8.4
-// https://editor.p5js.org/shmanfredi/sketches/y6u7bz5C1
 const URL = "https://storage.googleapis.com/tm-model/V-k69BewR/";
 
 let model, capture, topPrediction, numClasses, poseData, context
@@ -86,29 +82,17 @@ socket.on("resetTimer", resetTifoSer);
 
 // UPDATE DA SERVER
 function updateTesto(dataReceived) {
-//  console.log(dataReceived);
   testo = dataReceived //assegna a testo dati da server
 }
-
 // RICEZIONE BONUS
-socket.on("bonusIn", bonusServer);
-socket.on("bonusTotIn", bonusTotale_Ok);
+ socket.on("bonusIn", bonus_server);
 
-// UPDATE DA SERVER BONUS
-function bonusServer(data1) {
-//  console.log(data1 + ' bonus a caso');
-  contBonusSever = data1; //assegna a contBonus dati da server
-}
-
-function bonusTotale_Ok(data2) {
-  console.log(data2 + ' bonus tot ');
-  bonus_preso = data2; //assegna a contBonus dati da server
-}
+ function bonus_server(data){
+     contBonus = data.bonus;
+     bonus_preso = data.b_tot;
+   }
 
 ////////////////FINE COMUNICAZIONE SERVER/////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////
 
 function preload() {
   sciarpaBIcon = loadImage("./assets/immagini/sciarpa.png"); //sciarpa vuota bianca
@@ -116,9 +100,6 @@ function preload() {
   logor = loadImage("./assets/immagini/logopiccolo.png"); //logo ridotto
   sAlta = loadImage("./assets/immagini/Sciarpa_su.png");
   sBassa = loadImage("./assets/immagini/Sciarpa_giù.png");
-  //   daspo_3 = loadImage("./assets/immagini/daspo3.gif");
-  //   daspo_4 = loadImage("./assets/immagini/daspo4.gif");
-  //   daspo_5 = loadImage("./assets/immagini/daspo5.gif");
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -137,15 +118,10 @@ function setup() {
   b2.position(w, h * 4.5);
   b2.mousePressed(dispPausa);
   b2.id('pauseBtn');
-  contBonus = contBonusSever;
 }
 
 /////////////////////////////////////////////////////////////////////////
 function draw() {
-
-  //EMIT BONUS
-    socket.emit("bonusOut", contBonus);
-    socket.emit("bonusTotOut", bonus_preso);
 
   //CONTATORE i DEL TEMPO
   j++;
@@ -203,6 +179,13 @@ function draw() {
 
   if (p_coord === 80) {
     contBonus++;
+
+    //EMIT BONUS
+      let message = {
+        bonus: contBonus,
+        b_tot: bonus_preso,
+      }
+        socket.emit("bonusOut",message);
   }
   console.log('BONUS CONTATOR:' + contBonus);
 
