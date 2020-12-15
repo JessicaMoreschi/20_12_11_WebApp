@@ -8,7 +8,7 @@ var runningTime = 180; //secondi che scorrono
 var thisTime = 180; //secondi allo stopTimer
 var testo = 180; //variabile testo this countdown
 var bonus_preso = 0;
-var contBonus = 4; //conta quando p_coord arriva a 100
+var contBonus =12; //conta quando p_coord arriva a 100
 
 
 var playAllVideo = false; //bouleana play/stop countdown
@@ -28,20 +28,9 @@ var myCanvas
 socket.on("startTimer", startTimer); // StartTimer
 socket.on("stopTimer", stopTimer); // StopTimer
 socket.on("resetTimer", resetTimer); // ResetTimer
-// RICEZIONE BONUS
-socket.on("bonusIn", bonusServer);
-socket.on("bonusTotIn", bonusTotale_Ok);
-
-// UPDATE DA SERVER BONUS
-function bonusServer(data1) {
-//  console.log(data1 + ' bonus a caso');
-   contBonus= data1; //assegna a contBonus dati da server
-}
-
-function bonusTotale_Ok(data2) {
-//  console.log(data2 + ' bonus tot ');
-  bonus_preso = data2; //assegna a contBonus dati da server
-}
+// // RICEZIONE BONUS
+// socket.on("bonusIn", bonusServer);
+// socket.on("bonusTotIn", bonusTotale_Ok);
 
 function setup() {
   myCanvas = createCanvas(windowWidth/100*49.5, windowHeight/100*49.5);
@@ -270,3 +259,14 @@ function emitTimer(data){
 function windowResized() {
   resizeCanvas(windowWidth / 100 * 49, windowHeight / 100 * 49)
 }
+
+// // UPDATE DA SERVER BONUS
+// function bonusServer(data1) {
+// //  console.log(data1 + ' bonus a caso');
+//    contBonus= data1; //assegna a contBonus dati da server
+// }
+//
+// function bonusTotale_Ok(data2) {
+// //  console.log(data2 + ' bonus tot ');
+//   bonus_preso = data2; //assegna a contBonus dati da server
+// }
