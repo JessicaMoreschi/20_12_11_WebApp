@@ -160,8 +160,6 @@ function draw() {
     golTM2 = 3;
   }
 
- socket.emit('golTM1', golTM1);
- socket.emit('golTM2', golTM2)
 }
 
 function windowResized() {

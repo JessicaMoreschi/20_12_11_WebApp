@@ -32,14 +32,6 @@ function newConnection(socket) {
     socket.broadcast.emit("bonusIn", dataReceived)
   });
 
-  socket.on("golTM1", function(dataGol1) { //bonus
-    socket.broadcast.emit("golTM1", dataGol1)
-  });
-
-  socket.on("golTM2", function(dataGol2) { //bonus
-    socket.broadcast.emit("golTM2", dataGol2)
-  });
-
 
   //* aggiungi qui i messaggi per farli rimbalzare a tutti
 }

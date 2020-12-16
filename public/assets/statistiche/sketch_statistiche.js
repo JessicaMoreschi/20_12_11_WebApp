@@ -9,8 +9,8 @@ let mgTM1 = 3;
 let mgTM2 = 2;
 let golTM1 = 2;
 let golTM2 = 1;
-let pvTM1 = 50;
-let pvTM2 = 50;
+let pvTM1 = 20;
+let pvTM2;
 
 let nullgolTM1 = golTM1;
 let nullgolTM2 = golTM2;
@@ -19,21 +19,10 @@ let nullgolTM2 = golTM2;
 ////////////////COMUNICAZIONE SERVER/////////////////////////////////////
 // RICEZIONE
 socket.on("testoIn", updateTesto); //ricezione countdown
-socket.on("golTM1", updateGolTM1);
-socket.on("golTM2", updateGolTM2);
 
 // UPDATE DA SERVER
 function updateTesto(dataReceived) {
   testo = dataReceived //assegna a testo dati da server
-}
-
-function updateGolTM1(dataGol1){
-  golTM1 = dataGol1
-  console.log(dataGol1)
-}
-
-function updateGolTM2(dataGol2){
-  golTM2 = dataGol2
 }
 
 
@@ -78,8 +67,10 @@ function draw() {
   textAlign(CENTER);
   textSize(20);
   fill('#887b86');
-  text('TM1', width/12*4,height/7*1.5);
-  text('TM2', width/12*8,height/7*1.5);
+  text('TM1', width/12*5,height/7*1.5);
+  text('TM2', width/12*6.97,height/7*1.5);
+  text('TM1', width/12*2,height/7*6);
+  text('TM2', width/12*10,height/7*6);
   pop()
 
   push();
@@ -181,8 +172,7 @@ function draw() {
   text(golTM1+" : "+golTM2, width/2,height/12*5.5);
   pop()
 
-  pvTM1 = (mgTM1+nullgolTM1)/(mgTM1+mgTM2+golTM1+golTM2)*100
-  pvTM2 = (mgTM2+nullgolTM2)/(mgTM1+mgTM2+golTM1+golTM2)*100
+  pvTM2 = 100-pvTM1
 }
 
 function windowResized() {
