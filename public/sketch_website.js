@@ -163,7 +163,7 @@ function funIframe(url) {
 //FUNCTION SUBMENU STAT
 function funImgLoad(url) {
   document.getElementById("canvasStat").setAttribute("src", url);
-  if (url == "./assets/cronaca.png") {
+  if (url == './assets/cronaca/index_cronaca.html') {
     document.getElementById("cronaca").style.borderBottomWidth = '1.5px';
     document.getElementById("datipartita").style.borderBottomWidth = '0.5px';
     document.getElementById("statistiche").style.borderBottomWidth = '0.5px';
