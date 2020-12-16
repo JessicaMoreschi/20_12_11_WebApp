@@ -63,7 +63,7 @@ function draw() {
 
 //EMIT COUNTDOWN
   socket.emit("testoOut", testo);
-  
+
 //EMIT BONUS
   let message = {
     bonus: contBonus,
@@ -163,7 +163,7 @@ function funIframe(url) {
 //FUNCTION SUBMENU STAT
 function funImgLoad(url) {
   document.getElementById("canvasStat").setAttribute("src", url);
-  if (url == "/assets/cronaca.png") {
+  if (url == "./assets/cronaca.png") {
     document.getElementById("cronaca").style.borderBottomWidth = '1.5px';
     document.getElementById("datipartita").style.borderBottomWidth = '0.5px';
     document.getElementById("statistiche").style.borderBottomWidth = '0.5px';
@@ -172,7 +172,7 @@ function funImgLoad(url) {
     document.getElementById("datipartita").style.fontWeight = 'normal';
     document.getElementById("statistiche").style.fontWeight = 'normal';
     document.getElementById("formazione").style.fontWeight = 'normal';
-  } else if (url == "/assets/datipartita.png") {
+  } else if (url == "./assets/datiPartita/index_datiPartita.html") {
     document.getElementById("cronaca").style.borderBottomWidth = '0.5px';
     document.getElementById("datipartita").style.borderBottomWidth = '1.5px';
     document.getElementById("statistiche").style.borderBottomWidth = '0.5px';
@@ -181,7 +181,7 @@ function funImgLoad(url) {
     document.getElementById("datipartita").style.fontWeight = 'bold';
     document.getElementById("statistiche").style.fontWeight = 'normal';
     document.getElementById("formazione").style.fontWeight = 'normal';
-  } else if (url == "/assets/stat.png") {
+  } else if (url == "./assets/statistiche/index_statistiche.html") {
     document.getElementById("cronaca").style.borderBottomWidth = '0.5px';
     document.getElementById("datipartita").style.borderBottomWidth = '0.5px';
     document.getElementById("statistiche").style.borderBottomWidth = '1.5px';
@@ -190,7 +190,7 @@ function funImgLoad(url) {
     document.getElementById("datipartita").style.fontWeight = 'normal';
     document.getElementById("statistiche").style.fontWeight = 'bold';
     document.getElementById("formazione").style.fontWeight = 'normal';
-  } else if (url == "/assets/formazione.png") {
+  } else if (url == './assets/formazione/index_formazione.html') {
     document.getElementById("cronaca").style.borderBottomWidth = '0.5px';
     document.getElementById("datipartita").style.borderBottomWidth = '0.5px';
     document.getElementById("statistiche").style.borderBottomWidth = '0.5px';

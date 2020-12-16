@@ -310,6 +310,7 @@ transform-origin: 0 0;
     margin-top: 4.2%;
     border: none;
     padding: 0;
+    overflow: hidden;
 }
 
 #cronaca{
