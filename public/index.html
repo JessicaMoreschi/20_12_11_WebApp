@@ -34,15 +34,15 @@
     <div class="maglia"></div>
   </div>
   <div class="performance">
-    <p id="tm1">PERFORMANCE <b>TM1</b></p>
-    <p id="tm2">PERFORMANCE <b>TM2</b></p>
+    <p id="tm1">PERFORMANCE&nbsp <b>TEAM1</b></p>
+    <p id="tm2"><b>TEAM2</b> &nbspPERFORMANCE</p>
   </div>
   <div class="videoBar">
     <button id="startBtn" onclick="startTimer(), emitTimer('startTimer')" > start </button>
     <button id="stopBtn" onclick="stopTimer(), emitTimer('stopTimer')"> stop </button>
     <button id="resetBtn" onclick="resetTimer(), emitTimer('resetTimer')"> reset </button>
     <button id="x" onclick="smallScreen()" style="display:none">x</button>
-    <div id="real"></div>
+    <div id="real" onclick="startTimer(), emitTimer('startTimer')" ></div>
     <div id="large" onclick="fullScreen()"></div>
   </div>
   <div class="statBar">
@@ -50,8 +50,8 @@
     <p class="voceStat" onclick="funIframe('statistiche.html')" id="stat" style="background: rgba(214,209,211,0.25); font-weight:bold">STAT</p>
   </div >
   <div class="videoView" id="videoView"></div>
-  <div class="canvasIframe">
-  <iframe id="iframe" src="statistiche.html"></iframe>
+  <div class="canvasIframe" style="background-color: #f9f9f8">
+  <iframe style="background-color: #f9f9f8" id="iframe" src="statistiche.html"></iframe>
   </div>
   <div class="footer">
     <p>© 12Uomo – Il Vero tifo  |  Privacy Notice – Cookie Notice  – FAQ</p>

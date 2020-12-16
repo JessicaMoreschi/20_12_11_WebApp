@@ -6,6 +6,7 @@ let testo; //valore countdown
 
 let sliderWidth;
 let inc=0;
+let lastInc
 
 
 ////////////////COMUNICAZIONE SERVER/////////////////////////////////////
@@ -144,7 +145,8 @@ function draw() {
 
   if (testo<175) {
     if (inc>-50){
-    inc--}
+    inc=inc-50;
+    lastInc=inc}
   }
 
 }
