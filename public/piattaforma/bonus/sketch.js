@@ -7,7 +7,7 @@ let bonus_preso = 0;
 let contBonus = 0;
 
 let icon;
-let w, h, s; //posizione
+let w, h, s,i; //posizione
 
 ////////////////COMUNICAZIONE SERVER/////////////////////////////////////
 // RICEZIONE
@@ -51,6 +51,9 @@ function draw() {
         }
           socket.emit("bonusOut",message);
 
+      if (frameCount % 40 == 0) { //multiplo di 50 incrementa i
+        i++;
+      }
 
   background('#887b86');//scuro
   imageMode(CENTER); //per pittogrammi
@@ -105,8 +108,8 @@ pop();
     s = 30 * i;
   }
       ///////cambio cartella //////////////////////////////////////////////////
-      if(i =2 ){
-         window.open('indexPausa.html','_self');
+      if(i = 210 ){
+         window.open('../indexPausa.html', '_self');
        }
 
 }
