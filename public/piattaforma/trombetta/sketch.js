@@ -389,8 +389,7 @@ function draw() {
   ///////cambio cartella //////////////////////////////////////////////////
   if (testo == 130) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
-  }
-  if (testo == 30) {
+  } else if (testo == 26 || testo < 26) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   }
   //////////////////////////////////////////////////////////////////
