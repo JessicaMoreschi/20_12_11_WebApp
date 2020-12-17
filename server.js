@@ -32,6 +32,9 @@ function newConnection(socket) {
     socket.broadcast.emit("bonusIn", dataReceived)
   });
 
-
+  socket.on("daspoOut", function(dataReceived){//daspo
+  socket.broadcast.emit("daspoIn", dataReceived)
+  });
+  
   //* aggiungi qui i messaggi per farli rimbalzare a tutti
 }

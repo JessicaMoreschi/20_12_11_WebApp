@@ -358,17 +358,17 @@ function draw() {
 
     //gif diverse per durate diverse
     if (!daspo_gif_3) {
-      daspo_gif_3 = createImg("./assets/immagini/daspo3.gif");
+      daspo_gif_3 = createImg("./assets/daspo3.gif");
       daspo_gif_3.hide();
     }
 
     if (!daspo_gif_4) {
-      daspo_gif_4 = createImg("./assets/immagini/daspo4.gif");
+      daspo_gif_4 = createImg("./assets/daspo4.gif");
       daspo_gif_4.hide();
     }
 
     if (!daspo_gif_5) {
-      daspo_gif_5 = createImg("./assets/immagini/daspo5.gif");
+      daspo_gif_5 = createImg("./assets/daspo5.gif");
       daspo_gif_5.hide();
     }
 
@@ -406,7 +406,7 @@ function draw() {
         daspo_gif_5.hide();
       }
     }
-
+ console.log(vol_1)
   }
   ////////fine draw///////////////////////////////////////////////////////////////////////////////////
 

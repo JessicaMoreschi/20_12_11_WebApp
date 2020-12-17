@@ -41,7 +41,8 @@ let op = 0; //opacità rettangolo daspo
 let daspo_gif_3, daspo_gif_4, daspo_gif_5;
 let durata_daspo = 0; //durata della daspo
 let secondo_corrente = 0; //secondo dell'inizio daspo
-
+let daspo_server = 0;
+let daspo_tot= 0;
 
 let j = 0; //sottomultiplo di i, ogni i è composto da 50 j
 let pulsazione = 0; //variabile per fare pulsare il cerchio della trombetta
@@ -65,6 +66,12 @@ function updateTesto(dataReceived) {
      contBonus = data.bonus;
      bonus_preso = data.b_tot;
    }
+//UPDATE DASPO
+socket.on("daspoIn", updateDaspo);
+function updateDaspo(dataReceived){
+  daspo_server = dataReceived;
+}
+
 
 /////////////////////////////////////////////////////////////////////////
 
@@ -222,7 +229,7 @@ function draw() {
 
   // BARRETTE FEED UTENTE (LINETTE)
   for (var x = w * 3.8; x < w * 8.8; x += 40) {
-    if (keyIsDown(ENTER)) {
+    if (keyIsDown(ENTER) && daspo==false) {
       alt = 1 * random(1, 8.5);
       input_utente = 250;
       pulsazione=0;
@@ -326,6 +333,7 @@ function draw() {
     daspo = true;
     daspo_counter++;
     secondo_corrente = testo;
+    daspo_tot= daspo_counter + daspo_server;
   }
 
   //rettangolo in poacità per la daspo
@@ -356,17 +364,17 @@ function draw() {
     op = 210;
     alt = 1;
 
-    if (daspo_counter == 1) {
+    if (daspo_tot == 1) {
       durata_daspo = 3;
       daspo_gif_3.show();
       daspo_gif_3.size(150, AUTO);
       daspo_gif_3.position(width / 20, 3 * height / 4);
-    } else if (daspo_counter == 2) {
+    } else if (daspo_tot == 2) {
       durata_daspo = 4;
       daspo_gif_4.show();
       daspo_gif_4.size(150, AUTO);
       daspo_gif_4.position(width / 20, 3 * height / 4);
-    } else if (daspo_counter > 2) {
+    } else if (daspo_tot > 2) {
       durata_daspo = 5;
       daspo_gif_5.show();
       daspo_gif_5.size(150, AUTO);
@@ -378,15 +386,17 @@ function draw() {
   if (daspo == true && testo == secondo_corrente - durata_daspo) {
     op = 0;
     daspo = false;
-    if (daspo_counter == 1) {
+    if (daspo_tot == 1) {
       daspo_gif_3.hide();
-    } else if (daspo_counter == 2) {
+    } else if (daspo_tot == 2) {
       daspo_gif_4.hide();
-    } else if (daspo_counter > 2) {
+    } else if (daspo_tot > 2) {
       daspo_gif_5.hide();
     }
   }
 
+  socket.emit("daspoOut", daspo_tot);
+      console.log("daspo totale " + daspo_tot);
 
   ///////cambio cartella //////////////////////////////////////////////////
   if (i == 15) {
