@@ -37,9 +37,10 @@ function draw() {
 
 
 
-if(mouseIsPressed){
+if(testo == 84){
    window.open('index.html','_self');
 }
+
 }
 
 function windowResized() {

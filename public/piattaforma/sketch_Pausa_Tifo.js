@@ -1,5 +1,5 @@
 let logoIcon;
-let random_tifo;
+//let random_tifo;
 let i;
 /////////////////////////////////////////////////////////////////////////
 
@@ -22,19 +22,29 @@ function draw() {
     i++;
   }
 
-  random_tifo = round(random(4)); //diamo all utente 3 modi per tifare
-
-  if (mouseIsPressed) {
-    if (random_tifo == 1) {
-      window.open('sciarpata/indexApertura.html', '_self');
-    } else if (random_tifo == 2) {
-      window.open('esultazioni/indexApertura.html', '_self');
-    } else if (random_tifo == 3) {
-      window.open('trombetta/indexApertura.html', '_self');
-    }
+  //random_tifo = round(random(4)); //diamo all utente 3 modi per tifare
+  if (testo == 160) {
+    window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   }
+  //if (mouseIsPressed) {
+    if (testo == 155) {
+      window.open('trombetta/indexApertura.html', '_self');
+    } else if (testo == 128) {
+      window.open('esultazioni/indexApertura.html', '_self');
+    } else if (testo == 86) {
+      window.open('sciarpata/indexApertura.html', '_self');
+    } else if (testo == 60) {
+      window.open('trombetta/indexApertura.html', '_self');
+    } else if (testo == 10) {
+      window.open('esultazioni/indexApertura.html', '_self');
+    }else if (testo == 0) {
+      window.open('pagellino/index.html', '_self');
+    }
 
-}
+
+//fine draw
+  }
+//}
 
 /////////////////////////////////////////////////////////////////////
 

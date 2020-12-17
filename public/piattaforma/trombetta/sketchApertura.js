@@ -40,11 +40,14 @@ function draw() {
   fill('#B7AEB5'); //3 PALETTE
   text('PREPARATI A TIFARE', width / 2, height / 6*5.1 );
 
-
-
-if(mouseIsPressed){
+if(testo == 153){
    window.open('index.html','_self');
 }
+
+if(testo == 58){
+   window.open('index.html','_self');
+}
+
 }
 
 function windowResized() {

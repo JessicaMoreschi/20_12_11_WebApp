@@ -232,9 +232,6 @@ function draw() {
       pop();
 
     } else if (contBonus === 24) {
-
-      contBonus = 0; //azzerare i bonus
-      bonus_preso = 1; //per dire che hai completato una fascia di bonus
       window.open('../bonus-app12uomo/index.html', '_self'); //doppio puntino per andare nella cartella sopra
     }
 
@@ -419,7 +416,7 @@ function draw() {
   //console.log (topPrediction);
 
   ///////cambio cartella //////////////////////////////////////////////////
-  if (i == 20) {
+  if (testo == 75) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   }
   //////////////////////////////////////////////////////////////////

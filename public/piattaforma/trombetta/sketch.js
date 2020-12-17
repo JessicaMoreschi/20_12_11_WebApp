@@ -203,8 +203,6 @@ function draw() {
       pop();
 
     } else if (contBonus === 24) {
-      contBonus = 0; //azzerare i bonus
-      bonus_preso = 1; //per dire che hai completato una fascia di bonus
       window.open('../bonus-app12uomo/index.html', '_self'); //doppio puntino per andare nella cartella sopra
     }
     ellipse(w + s, h * 45.5, 15);
@@ -389,7 +387,10 @@ function draw() {
 
 
   ///////cambio cartella //////////////////////////////////////////////////
-  if (i == 15) {
+  if (testo == 130) {
+    window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
+  }
+  if (testo == 30) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   }
   //////////////////////////////////////////////////////////////////

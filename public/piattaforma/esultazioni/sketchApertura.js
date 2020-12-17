@@ -35,8 +35,11 @@ function draw() {
   text('PREPARATI A TIFARE', width / 2, height / 6*5.1 );
 
 
+if(testo == 126){
+     window.open('index.html','_self');
+  }
 
-if(mouseIsPressed){
+if(testo == 8){
    window.open('index.html','_self');
 }
 }
