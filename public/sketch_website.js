@@ -12,18 +12,13 @@ var testo = 180; //variabile testo this countdown
 var bonus_preso = 0;
 var contBonus = 12; //conta quando p_coord arriva a 100
 
+<<<<<<< Updated upstream
 var daspo_counter = 0;
 
 var playAllVideo = false; //bouleana play/stop countdown
+=======
+>>>>>>> Stashed changes
 let videoAction;
-let videoActionStart = 180; //inizio video Action
-let videoActionStop = 0; //fine video Action
-let videoGoal;
-let videoGoalStart = 175; //inizio video
-let videoGoalStop = 165; //fine video Goal
-let videoCorner;
-let videoCornerStart = 165; //inizio video
-let videoCornerStop = 150; //fine video Corner
 var myCanvas
 
 
@@ -48,6 +43,7 @@ function updateDaspo(dataReceived) {
 
 
 function setup() {
+<<<<<<< Updated upstream
   myCanvas = createCanvas(windowWidth / 100 * 49.5, windowHeight / 100 * 49.5);
   myCanvas.parent('videoView');
   background("#b1a4af");
@@ -59,6 +55,10 @@ function setup() {
   videoCorner.hide();
   videoGoal = createVideo('assets/goal.mp4');
   videoGoal.hide();
+=======
+// SETUP VIDEO
+  videoAction = document.getElementById('videoView');
+>>>>>>> Stashed changes
 }
 
 
@@ -80,6 +80,7 @@ function draw() {
   }
   socket.emit("bonusOut", message);
 
+<<<<<<< Updated upstream
 
   //EMIT daspoOut
 
@@ -100,11 +101,42 @@ function draw() {
     imageMode(CENTER);
     noStroke();
     image(videoGoal, width / 2, height / 2, width / 10 * 9.3, height / 10 * 11);
-  }
+=======
+//spot
+if (testo == 91) {
+  videoAction.pause();
+  videoAction.setAttribute('src', 'assets/spot.mp4');
+  videoAction.play();
+  document.getElementById('stopBtn').disabled = true;
+}
 
+if (testo == 90) {
+  clearInterval(x); //blocca countdown
+  thisTime = runningTime; //registra secondo allo stop
+  testo = 90; //visualizza secondo allo stop
+  countDown = new Date().getTime() + (thisTime * 1000); //+1000=+1s
+
+  if (videoAction.ended){
+    videoAction.setAttribute('src', 'assets/Partita_Tempo2.mp4');
+    document.getElementById('stopBtn').disabled = false;
+
+    clearInterval(x); //blocca countdown
+    thisTime = 89; //resetta countdown
+    testo = thisTime; //visualizza countdown
+    countDown = new Date().getTime() + (thisTime * 1000); //+1000=+1s
+    startTimer()
+>>>>>>> Stashed changes
+  }
+}
+
+
+<<<<<<< Updated upstream
   // PLAY/STOP VIDEO
   toggleVid(); //check funzione play/stop
+=======
+>>>>>>> Stashed changes
 }
+
 
 //FUNCTION PLAY-STOP-RESET TIMER
 function startTimer() {
@@ -115,7 +147,7 @@ function startTimer() {
     runningTime = Math.floor((gap / 1000)); // Time calculations for seconds
     testo = runningTime //setta variabile time
   }, 1000);
-  playAllVideo = true; //lega video al timer
+  videoAction.play(); //lega video al timer
 }
 
 function stopTimer() {
@@ -123,7 +155,7 @@ function stopTimer() {
   thisTime = runningTime; //registra secondo allo stop
   testo = thisTime; //visualizza secondo allo stop
   countDown = new Date().getTime() + (thisTime * 1000); //+1000=+1s
-  playAllVideo = false; //lega video al timer
+  videoAction.pause(); //lega video al timer
 }
 
 function resetTimer() {
@@ -131,32 +163,8 @@ function resetTimer() {
   thisTime = 180; //resetta countdown
   testo = thisTime; //visualizza countdown
   countDown = new Date().getTime() + (thisTime * 1000); //+1000=+1s
-  playAllVideo = false; //lega video al timer
-}
-
-// FUNCTION LINK VIDEO A TIMER
-function toggleVid() {
-  //stop
-  if (playAllVideo == false) {
-    videoAction.pause();
-    videoCorner.pause();
-    videoGoal.pause();
-    //play
-  } else if (playAllVideo == true) {
-    if (testo < videoActionStart && testo > videoActionStop) {
-      videoAction.play();
-    };
-    if ((testo < videoGoalStart && testo > videoGoalStop) ||
-      (testo < videoCornerStart && testo > videoCornerStop)) {
-      videoAction.pause() //videoAction
-    };
-    if (testo < videoGoalStart && testo > videoGoalStop) {
-      videoCorner.play() //videoGoal
-    };
-    if (testo < videoCornerStart && testo > videoCornerStop) {
-      videoGoal.play() //videoCorner
-    };
-  }
+  videoAction.pause(); //lega video al timer
+  videoAction.load();
 }
 
 //FUNCTION IFRAME TIFO/STAT
@@ -284,14 +292,3 @@ function emitTimer(data) {
 function windowResized() {
   resizeCanvas(windowWidth / 100 * 49, windowHeight / 100 * 49)
 }
-
-// // UPDATE DA SERVER BONUS
-// function bonusServer(data1) {
-// //  console.log(data1 + ' bonus a caso');
-//    contBonus= data1; //assegna a contBonus dati da server
-// }
-//
-// function bonusTotale_Ok(data2) {
-// //  console.log(data2 + ' bonus tot ');
-//   bonus_preso = data2; //assegna a contBonus dati da server
-// }
