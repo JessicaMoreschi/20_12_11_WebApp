@@ -130,6 +130,11 @@ function draw() {
     j = 0;
   }
 
+  ///////cambio cartella //////////////////////////////////////////////////
+  if (testo == 75) {
+    window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
+  }
+  
   background('#F9F9F9'); //chiaro
   imageMode(CENTER); //per pittogrammi
   noStroke();
@@ -415,10 +420,7 @@ function draw() {
 
   //console.log (topPrediction);
 
-  ///////cambio cartella //////////////////////////////////////////////////
-  if (testo == 75) {
-    window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
-  }
+
   //////////////////////////////////////////////////////////////////
 }
 
