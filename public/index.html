@@ -33,10 +33,7 @@
     <div class="team" id="team2">TEAM2</div>
     <div class="maglia"></div>
   </div>
-  <div class="performance">
-    <p id="tm1">PERFORMANCE&nbsp <b>TEAM1</b></p>
-    <p id="tm2"><b>TEAM2</b> &nbspPERFORMANCE</p>
-  </div>
+  <iframe class="performance" src="./assets/prestazioni/index_prestazioni.html"></iframe>
   <div class="videoBar">
     <button id="startBtn" onclick="startTimer(), emitTimer('startTimer')" > start </button>
     <button id="stopBtn" onclick="stopTimer(), emitTimer('stopTimer')"> stop </button>
@@ -49,9 +46,10 @@
     <p class="voceStat" onclick="funIframe('/piattaforma/index.html')" id="tifo" style="background: #f9f9f8">TIFO</p>
     <p class="voceStat" onclick="funIframe('statistiche.html')" id="stat" style="background: rgba(214,209,211,0.25); font-weight:bold">STAT</p>
   </div >
-  <div class="videoView" id="videoView"></div>
-  <div class="canvasIframe" style="background-color: #f9f9f8">
-  <iframe style="background-color: #f9f9f8" id="iframe" src="statistiche.html"></iframe>
+  <!-- <div class="videoView" id="videoView"></div> -->
+  <video class="videoView" id="videoView" src='assets/Partita_Tempo1.mp4'> </video>
+  <div class="canvasIframe">
+  <iframe id="iframe" src="statistiche.html"></iframe>
   </div>
   <div class="footer">
     <p>© 12Uomo – Il Vero tifo  |  Privacy Notice – Cookie Notice  – FAQ</p>
