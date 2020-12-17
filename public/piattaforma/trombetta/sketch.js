@@ -398,7 +398,7 @@ function draw() {
   console.log("daspo totale " + daspo_counter);
 
   ///////cambio cartella //////////////////////////////////////////////////
-  if (testo == 135) {
+  if (testo == 133) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   } else if (testo == 26 || testo < 26) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
