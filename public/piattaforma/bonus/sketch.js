@@ -2,7 +2,6 @@
 let socket = io(); //setting server
 //Coundown
 var testo = 180; //valore countdown
-let testi_ingresso = testo;
 // variabili BONUS ///
 let bonus_preso = 0;
 let contBonus = 0;
@@ -106,7 +105,7 @@ pop();
     s = 30 * i;
   }
       ///////cambio cartella //////////////////////////////////////////////////
-      if(testo == testo_ingresso +2){
+      if(i =2 ){
          window.open('indexPausa.html','_self');
        }
 
