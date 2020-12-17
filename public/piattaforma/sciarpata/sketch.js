@@ -131,10 +131,10 @@ function draw() {
   }
 
   ///////cambio cartella //////////////////////////////////////////////////
-  if (testo == 75) {
+  if (testo == 70) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   }
-  
+
   background('#F9F9F9'); //chiaro
   imageMode(CENTER); //per pittogrammi
   noStroke();

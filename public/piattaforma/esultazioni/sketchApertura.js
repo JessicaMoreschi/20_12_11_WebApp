@@ -52,9 +52,7 @@ function draw() {
 
 if(testo == 126){
      window.open('index.html','_self');
-  }
-
-if(testo == 8){
+  } else if(testo == 8 || testo<8){
    window.open('index.html','_self');
 }
 }
