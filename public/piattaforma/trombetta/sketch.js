@@ -41,8 +41,7 @@ let op = 0; //opacità rettangolo daspo
 let daspo_gif_3, daspo_gif_4, daspo_gif_5;
 let durata_daspo = 0; //durata della daspo
 let secondo_corrente = 0; //secondo dell'inizio daspo
-let daspo_server = 0;
-let daspo_tot= 0;
+
 
 let j = 0; //sottomultiplo di i, ogni i è composto da 50 j
 let pulsazione = 0; //variabile per fare pulsare il cerchio della trombetta
@@ -60,16 +59,18 @@ function updateTesto(dataReceived) {
   testo = dataReceived //assegna a testo dati da server
 }
 // RICEZIONE BONUS
- socket.on("bonusIn", bonus_server);
+socket.on("bonusIn", bonus_server);
 
- function bonus_server(data){
-     contBonus = data.bonus;
-     bonus_preso = data.b_tot;
-   }
+function bonus_server(data) {
+  contBonus = data.bonus;
+  bonus_preso = data.b_tot;
+}
+
 //UPDATE DASPO
 socket.on("daspoIn", updateDaspo);
-function updateDaspo(dataReceived){
-  daspo_server = dataReceived;
+
+function updateDaspo(dataReceived) {
+  daspo_counter = dataReceived;
 }
 
 
@@ -158,12 +159,12 @@ function draw() {
 
   if (p_coord === 80) {
     contBonus++;
-  //EMIT BONUS
-      let message = {
-        bonus: contBonus,
-        b_tot: bonus_preso,
-      }
-        socket.emit("bonusOut",message);
+    //EMIT BONUS
+    let message = {
+      bonus: contBonus,
+      b_tot: bonus_preso,
+    }
+    socket.emit("bonusOut", message);
   }
   console.log('BONUS CONTATOR:' + contBonus);
 
@@ -227,10 +228,10 @@ function draw() {
 
   // BARRETTE FEED UTENTE (LINETTE)
   for (var x = w * 3.8; x < w * 8.8; x += 40) {
-    if (keyIsDown(ENTER) && daspo==false) {
+    if (keyIsDown(ENTER) && daspo == false) {
       alt = 1 * random(1, 8.5);
       input_utente = 250;
-      pulsazione=0;
+      pulsazione = 0;
     } else {
       alt = 1;
       input_utente = 0;
@@ -273,7 +274,7 @@ function draw() {
     noStroke()
     fill("#E5E5E5")
     ellipse(width / 2, height / 2, 100 + pulsazione)
-    pop()//fine puslazioni cerchio
+    pop() //fine puslazioni cerchio
 
     push();
     fill('#877B85');
@@ -306,7 +307,7 @@ function draw() {
   pop();
 
   //TUTORIAL TROMBETTA + TESTI GIUSTO/SBAGLATO
-  if (i == 0 || i == 2 ) {
+  if (i == 0 || i == 2) {
     image(tut1Icon, w * 10, h * 24.5, tut1Icon.width / 5.5, tut1Icon.height / 5.5);
     tut2Icon.reset();
     text('Segui il ritmo degli altri', w * 10, h * 31);
@@ -331,8 +332,8 @@ function draw() {
     daspo = true;
     daspo_counter++;
     secondo_corrente = testo;
-    }
-daspo_tot= daspo_counter + daspo_server;
+  }
+
 
   //rettangolo in poacità per la daspo
   push();
@@ -362,17 +363,17 @@ daspo_tot= daspo_counter + daspo_server;
     op = 210;
     alt = 1;
 
-    if (daspo_tot == 1) {
+    if (daspo_counter == 1) {
       durata_daspo = 3;
       daspo_gif_3.show();
       daspo_gif_3.size(150, AUTO);
       daspo_gif_3.position(width / 20, 3 * height / 4);
-    } else if (daspo_tot == 2) {
+    } else if (daspo_counter == 2) {
       durata_daspo = 4;
       daspo_gif_4.show();
       daspo_gif_4.size(150, AUTO);
       daspo_gif_4.position(width / 20, 3 * height / 4);
-    } else if (daspo_tot > 2) {
+    } else if (daspo_counter > 2) {
       durata_daspo = 5;
       daspo_gif_5.show();
       daspo_gif_5.size(150, AUTO);
@@ -384,17 +385,17 @@ daspo_tot= daspo_counter + daspo_server;
   if (daspo == true && testo == secondo_corrente - durata_daspo) {
     op = 0;
     daspo = false;
-    if (daspo_tot == 1) {
+    if (daspo_counter == 1) {
       daspo_gif_3.hide();
-    } else if (daspo_tot == 2) {
+    } else if (daspo_counter == 2) {
       daspo_gif_4.hide();
-    } else if (daspo_tot > 2) {
+    } else if (daspo_counter > 2) {
       daspo_gif_5.hide();
     }
   }
 
-  socket.emit("daspoOut", daspo_tot);
-      console.log("daspo totale " + daspo_tot);
+  socket.emit("daspoOut", daspo_counter);
+  console.log("daspo totale " + daspo_counter);
 
   ///////cambio cartella //////////////////////////////////////////////////
   if (testo == 130) {

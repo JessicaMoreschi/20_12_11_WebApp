@@ -85,12 +85,20 @@ function updateTesto(dataReceived) {
   testo = dataReceived //assegna a testo dati da server
 }
 // RICEZIONE BONUS
- socket.on("bonusIn", bonus_server);
+socket.on("bonusIn", bonus_server);
 
- function bonus_server(data){
-     contBonus = data.bonus;
-     bonus_preso = data.b_tot;
-   }
+function bonus_server(data) {
+  contBonus = data.bonus;
+  bonus_preso = data.b_tot;
+}
+
+//UPDATE DASPO
+socket.on("daspoIn", updateDaspo);
+
+function updateDaspo(dataReceived) {
+  daspo_counter = dataReceived;
+}
+
 
 ////////////////FINE COMUNICAZIONE SERVER/////////////////////////////////////
 
@@ -186,11 +194,11 @@ function draw() {
     contBonus++;
 
     //EMIT BONUS
-      let message = {
-        bonus: contBonus,
-        b_tot: bonus_preso,
-      }
-        socket.emit("bonusOut",message);
+    let message = {
+      bonus: contBonus,
+      b_tot: bonus_preso,
+    }
+    socket.emit("bonusOut", message);
   }
   console.log('BONUS CONTATOR:' + contBonus);
 
@@ -269,11 +277,11 @@ function draw() {
     image(sciarpaBIcon, w * 10, h * 25, sciarpaBIcon.width / 6, sciarpaBIcon.height / 6); //chiara
     feed_piattaforma = 0;
   } else if (i % 2 == 0 && i > 3) { //cambio colore delle bottone centrale: feedback utente
-    if (j == 0 || j == 23 || j == 46 || j==70) { //pulsazioni del cerchio
+    if (j == 0 || j == 23 || j == 46 || j == 70) { //pulsazioni del cerchio
       pulsazione = 0
-    } else if (j < 12 || j > 23 && j < 35 || j>46 && j<58) {
+    } else if (j < 12 || j > 23 && j < 35 || j > 46 && j < 58) {
       pulsazione += 4;
-    } else if (j > 12 && j < 23 || j > 35 && j < 46 || j>58 && j<70) {
+    } else if (j > 12 && j < 23 || j > 35 && j < 46 || j > 58 && j < 70) {
       pulsazione -= 4;
     }
     push()
@@ -417,6 +425,9 @@ function draw() {
       daspo_gif_5.hide();
     }
   }
+
+  socket.emit("daspoOut", daspo_counter);
+
 
   //console.log (topPrediction);
 

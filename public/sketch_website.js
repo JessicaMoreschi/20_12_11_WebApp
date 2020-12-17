@@ -12,6 +12,7 @@ var testo = 180; //variabile testo this countdown
 var bonus_preso = 0;
 var contBonus = 12; //conta quando p_coord arriva a 100
 
+var daspo_counter = 0;
 
 var playAllVideo = false; //bouleana play/stop countdown
 let videoAction;
@@ -31,19 +32,27 @@ socket.on("startTimer", startTimer); // StartTimer
 socket.on("stopTimer", stopTimer); // StopTimer
 socket.on("resetTimer", resetTimer); // ResetTimer
 // RICEZIONE BONUS
- socket.on("bonusIn", bonus_server);
+socket.on("bonusIn", bonus_server);
 
- function bonus_server(data){
-     contBonus = data.bonus;
-     bonus_preso = data.b_tot;
-   }
+function bonus_server(data) {
+  contBonus = data.bonus;
+  bonus_preso = data.b_tot;
+}
+
+//RICEZIONE DASPO
+socket.on("daspoIn", updateDaspo);
+
+function updateDaspo(dataReceived) {
+  daspo_counter = dataReceived;
+}
+
 
 function setup() {
-  myCanvas = createCanvas(windowWidth/100*49.5, windowHeight/100*49.5);
+  myCanvas = createCanvas(windowWidth / 100 * 49.5, windowHeight / 100 * 49.5);
   myCanvas.parent('videoView');
   background("#b1a4af");
 
-// SETUP VIDEO
+  // SETUP VIDEO
   videoAction = createVideo('assets/action.mp4');
   videoAction.hide();
   videoCorner = createVideo('assets/corner.mp4');
@@ -54,41 +63,46 @@ function setup() {
 
 
 function draw() {
-// DISPLAY COUNTDOWN
-  document.getElementById("countDown").innerHTML = testo+"'";
+  // DISPLAY COUNTDOWN
+  document.getElementById("countDown").innerHTML = testo + "'";
 
   if (gap < 0) {
     testo = "finish" // text fine partita
   }
 
-//EMIT COUNTDOWN
+  //EMIT COUNTDOWN
   socket.emit("testoOut", testo);
 
-//EMIT BONUS
+  //EMIT BONUS
   let message = {
     bonus: contBonus,
     b_tot: bonus_preso,
   }
-    socket.emit("bonusOut",message);
+  socket.emit("bonusOut", message);
 
-// DISPLAY VIDEO
+
+  //EMIT daspoOut
+
+  socket.emit("daspoOut", daspo_counter);
+
+  // DISPLAY VIDEO
   if (testo < videoActionStart && testo > videoActionStop) {
     imageMode(CENTER);
     noStroke();
-    image(videoAction, width/2, height/2, width/10*9.3, height/10*11);
+    image(videoAction, width / 2, height / 2, width / 10 * 9.3, height / 10 * 11);
   }
   if (testo < videoGoalStart && testo > videoGoalStop) {
     imageMode(CENTER);
     noStroke();
-    image(videoCorner, width/2, height/2, width/10*9.3, height/10*11);
+    image(videoCorner, width / 2, height / 2, width / 10 * 9.3, height / 10 * 11);
   }
   if (testo < videoCornerStart && testo > videoCornerStop) {
     imageMode(CENTER);
     noStroke();
-    image(videoGoal, width/2, height/2, width/10*9.3, height/10*11);
+    image(videoGoal, width / 2, height / 2, width / 10 * 9.3, height / 10 * 11);
   }
 
-// PLAY/STOP VIDEO
+  // PLAY/STOP VIDEO
   toggleVid(); //check funzione play/stop
 }
 
@@ -103,6 +117,7 @@ function startTimer() {
   }, 1000);
   playAllVideo = true; //lega video al timer
 }
+
 function stopTimer() {
   clearInterval(x); //blocca countdown
   thisTime = runningTime; //registra secondo allo stop
@@ -110,6 +125,7 @@ function stopTimer() {
   countDown = new Date().getTime() + (thisTime * 1000); //+1000=+1s
   playAllVideo = false; //lega video al timer
 }
+
 function resetTimer() {
   clearInterval(x); //blocca countdown
   thisTime = 180; //resetta countdown
@@ -235,9 +251,9 @@ function fullScreen() {
 }
 
 function smallScreen() {
-  myCanvas = createCanvas(windowWidth/100*49.5, windowHeight/100*49.5);
+  myCanvas = createCanvas(windowWidth / 100 * 49.5, windowHeight / 100 * 49.5);
   myCanvas.parent('videoView');
-  myCanvas.position(0,windowHeight/100*43.25);
+  myCanvas.position(0, windowHeight / 100 * 43.25);
   background("#b1a4af");
   document.getElementById("x").style.display = 'none';
   document.getElementById("fullScreen").style.display = 'none';
@@ -261,7 +277,7 @@ function smallScreen() {
   document.getElementById("resetBtn").removeAttribute("style.left");
 }
 
-function emitTimer(data){
+function emitTimer(data) {
   socket.emit(data);
 }
 
