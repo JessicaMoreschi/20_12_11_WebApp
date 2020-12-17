@@ -29,8 +29,8 @@ function setup() {
 }
 /////////////////////////////////////////////////////////////////////////
 function draw() {
-  
-  if(testo == 84){
+
+  if(testo == 84|| testo <84){
      window.open('index.html','_self');
   }
   background('#F9F9F9'); //chiaro

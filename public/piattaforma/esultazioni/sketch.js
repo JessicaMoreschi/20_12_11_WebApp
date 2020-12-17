@@ -143,10 +143,9 @@ function draw() {
   rect(w * 10 - width / 7, h * 45.5 - 7.5, xBarra, 15, 20);
   pop();
   ///////cambio cartella //////////////////////////////////////////////////
-  if (testo == 120) {
+  if (testo == 118) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
-  }
-  if (testo == 2) {
+  } else if (testo == 2||testo<2) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   }
   //////////////////////////////////////////////////////////////////
