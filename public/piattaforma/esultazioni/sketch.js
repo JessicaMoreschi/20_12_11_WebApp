@@ -43,6 +43,8 @@ let op = 0; //opacità rettangolo daspo
 let daspo_gif_3, daspo_gif_4, daspo_gif_5;
 let durata_daspo = 0; //durata della daspo
 let secondo_corrente = 0; //secondo dell'inizio daspo
+let daspo_server = 0;
+let daspo_tot= 0;
 
 
 let j = 0; //sottomultiplo di i, ogni i è composto da 50 j
@@ -59,6 +61,13 @@ socket.on("resetTimer", resetTifoSer);
 function updateTesto(dataReceived) {
   testo = dataReceived //assegna a testo dati da server
 }
+
+//UPDATE DASPO
+socket.on("daspoIn", updateDaspo);
+function updateDaspo(dataReceived){
+  daspo_server = dataReceived;
+}
+
 // RICEZIONE BONUS
  socket.on("bonusIn", bonus_server);
 
@@ -348,6 +357,7 @@ function draw() {
       daspo_counter++;
       secondo_corrente = testo;
     }
+    daspo_tot= daspo_counter + daspo_server;
 
     //rettangolo in poacità per la daspo
     push();
@@ -376,17 +386,17 @@ function draw() {
     if (daspo == true) {
       op = 210;
 
-      if (daspo_counter == 1) {
+      if (daspo_tot == 1) {
         durata_daspo = 3;
         daspo_gif_3.show();
         daspo_gif_3.size(150, AUTO);
         daspo_gif_3.position(width / 20, 3 * height / 4);
-      } else if (daspo_counter == 2) {
+      } else if (daspo_tot == 2) {
         durata_daspo = 4;
         daspo_gif_4.show();
         daspo_gif_4.size(150, AUTO);
         daspo_gif_4.position(width / 20, 3 * height / 4);
-      } else if (daspo_counter > 2) {
+      } else if (daspo_tot > 2) {
         durata_daspo = 5;
         daspo_gif_5.show();
         daspo_gif_5.size(150, AUTO);
@@ -398,15 +408,18 @@ function draw() {
     if (daspo == true && testo == secondo_corrente - durata_daspo) {
       op = 0;
       daspo = false;
-      if (daspo_counter == 1) {
+      if (daspo_tot == 1) {
         daspo_gif_3.hide();
-      } else if (daspo_counter == 2) {
+      } else if (daspo_tot == 2) {
         daspo_gif_4.hide();
-      } else if (daspo_counter > 2) {
+      } else if (daspo_tot > 2) {
         daspo_gif_5.hide();
       }
     }
  console.log(vol_1)
+ socket.emit("daspoOut", daspo_tot);
+     console.log("daspo totale " + daspo_tot);
+
   }
   ////////fine draw///////////////////////////////////////////////////////////////////////////////////
 

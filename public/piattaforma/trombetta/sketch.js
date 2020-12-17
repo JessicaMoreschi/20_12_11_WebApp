@@ -333,8 +333,8 @@ function draw() {
     daspo = true;
     daspo_counter++;
     secondo_corrente = testo;
-    daspo_tot= daspo_counter + daspo_server;
-  }
+    }
+daspo_tot= daspo_counter + daspo_server;
 
   //rettangolo in poacità per la daspo
   push();
@@ -399,9 +399,9 @@ function draw() {
       console.log("daspo totale " + daspo_tot);
 
   ///////cambio cartella //////////////////////////////////////////////////
-  if (i == 15) {
-    window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
-  }
+  // if (i == 15) {
+  //   window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
+  //}
   //////////////////////////////////////////////////////////////////
 
 }
