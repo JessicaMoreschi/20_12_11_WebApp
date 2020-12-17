@@ -9,7 +9,7 @@ var thisTime = 180; //secondi allo stopTimer
 var testo = 180; //variabile testo this countdown
 
 
-var bonus_preso = 1;
+var bonus_preso = 0;
 var contBonus = 12; //conta quando p_coord arriva a 100
 
 

@@ -1,6 +1,34 @@
+// Server
+let socket = io(); //setting server
+//Coundown
+var testo = 180; //valore countdown
+let testi_ingresso;
+// variabili BONUS ///
+let bonus_preso = 0;
+let contBonus = 0;
 
 let icon;
 let w, h, s; //posizione
+
+////////////////COMUNICAZIONE SERVER/////////////////////////////////////
+// RICEZIONE
+socket.on("testoIn", updateTesto); //ricezione countdown
+socket.on("stopTimer", dispPausaSer);
+socket.on("startTimer", startTifoSer);
+socket.on("resetTimer", resetTifoSer);
+
+// UPDATE DA SERVER
+function updateTesto(dataReceived) {
+  testo = dataReceived //assegna a testo dati da server
+}
+// RICEZIONE BONUS
+ socket.on("bonusIn", bonus_server);
+
+ function bonus_server(data){
+     contBonus = data.bonus;
+     bonus_preso = data.b_tot;
+   }
+
 /////////////////////////////////////////////////////////////////////////
 
 function preload() {
@@ -10,9 +38,21 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(12); //rallenta
+  testo_ingresso = testo;
 }
 /////////////////////////////////////////////////////////////////////////
 function draw() {
+  contBonus = 0; //azzerare i bonus
+  bonus_preso = 1; //per dire che hai completato una fascia di bonus
+
+  //EMIT BONUS
+        let message = {
+          bonus: contBonus,
+          b_tot: bonus_preso,
+        }
+          socket.emit("bonusOut",message);
+    }
+
   background('#887b86');//scuro
   imageMode(CENTER); //per pittogrammi
   w = width / 20;
@@ -66,7 +106,8 @@ pop();
     s = 30 * i;
   }
 
-if(mouseIsPressed){
+///////cambio cartella //////////////////////////////////////////////////
+if(testo == testo_ingresso +2){
    window.open('indexPausa.html','_self');
 }
 }
