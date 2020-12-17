@@ -213,7 +213,7 @@ function draw() {
       pop();
 
     } else if (contBonus === 24) {
-      window.open('../bonus-app12uomo/index.html', '_self'); //doppio puntino per andare nella cartella sopra
+      window.open('../bonus/index.html', '_self'); //doppio puntino per andare nella cartella sopra
     }
 
     ellipse(w + s, h * 45.5, 15);
