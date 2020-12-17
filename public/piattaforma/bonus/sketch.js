@@ -2,7 +2,7 @@
 let socket = io(); //setting server
 //Coundown
 var testo = 180; //valore countdown
-let testi_ingresso;
+let testi_ingresso = testo;
 // variabili BONUS ///
 let bonus_preso = 0;
 let contBonus = 0;
@@ -38,7 +38,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(12); //rallenta
-  testo_ingresso = testo;
+
 }
 /////////////////////////////////////////////////////////////////////////
 function draw() {
@@ -51,7 +51,7 @@ function draw() {
           b_tot: bonus_preso,
         }
           socket.emit("bonusOut",message);
-    }
+
 
   background('#887b86');//scuro
   imageMode(CENTER); //per pittogrammi
@@ -105,13 +105,12 @@ pop();
         ellipse(w*9 + s, h * 42, 15);
     s = 30 * i;
   }
+      ///////cambio cartella //////////////////////////////////////////////////
+      if(testo == testo_ingresso +2){
+         window.open('indexPausa.html','_self');
+       }
 
-///////cambio cartella //////////////////////////////////////////////////
-if(testo == testo_ingresso +2){
-   window.open('indexPausa.html','_self');
 }
-}
-
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
