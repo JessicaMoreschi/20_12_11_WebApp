@@ -12,12 +12,10 @@ var testo = 180; //variabile testo this countdown
 var bonus_preso = 0;
 var contBonus = 12; //conta quando p_coord arriva a 100
 
-<<<<<<< Updated upstream
+
 var daspo_counter = 0;
 
-var playAllVideo = false; //bouleana play/stop countdown
-=======
->>>>>>> Stashed changes
+
 let videoAction;
 var myCanvas
 
@@ -43,22 +41,9 @@ function updateDaspo(dataReceived) {
 
 
 function setup() {
-<<<<<<< Updated upstream
-  myCanvas = createCanvas(windowWidth / 100 * 49.5, windowHeight / 100 * 49.5);
-  myCanvas.parent('videoView');
-  background("#b1a4af");
 
-  // SETUP VIDEO
-  videoAction = createVideo('assets/action.mp4');
-  videoAction.hide();
-  videoCorner = createVideo('assets/corner.mp4');
-  videoCorner.hide();
-  videoGoal = createVideo('assets/goal.mp4');
-  videoGoal.hide();
-=======
 // SETUP VIDEO
   videoAction = document.getElementById('videoView');
->>>>>>> Stashed changes
 }
 
 
@@ -80,28 +65,12 @@ function draw() {
   }
   socket.emit("bonusOut", message);
 
-<<<<<<< Updated upstream
+
 
   //EMIT daspoOut
 
   socket.emit("daspoOut", daspo_counter);
 
-  // DISPLAY VIDEO
-  if (testo < videoActionStart && testo > videoActionStop) {
-    imageMode(CENTER);
-    noStroke();
-    image(videoAction, width / 2, height / 2, width / 10 * 9.3, height / 10 * 11);
-  }
-  if (testo < videoGoalStart && testo > videoGoalStop) {
-    imageMode(CENTER);
-    noStroke();
-    image(videoCorner, width / 2, height / 2, width / 10 * 9.3, height / 10 * 11);
-  }
-  if (testo < videoCornerStart && testo > videoCornerStop) {
-    imageMode(CENTER);
-    noStroke();
-    image(videoGoal, width / 2, height / 2, width / 10 * 9.3, height / 10 * 11);
-=======
 //spot
 if (testo == 91) {
   videoAction.pause();
@@ -125,16 +94,10 @@ if (testo == 90) {
     testo = thisTime; //visualizza countdown
     countDown = new Date().getTime() + (thisTime * 1000); //+1000=+1s
     startTimer()
->>>>>>> Stashed changes
+
   }
 }
 
-
-<<<<<<< Updated upstream
-  // PLAY/STOP VIDEO
-  toggleVid(); //check funzione play/stop
-=======
->>>>>>> Stashed changes
 }
 
 
