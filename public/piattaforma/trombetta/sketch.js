@@ -211,7 +211,7 @@ function draw() {
       pop();
 
     } else if (contBonus === 24) {
-      window.open('../bonus-app12uomo/index.html', '_self'); //doppio puntino per andare nella cartella sopra
+      window.open('../bonus/index.html', '_self'); //doppio puntino per andare nella cartella sopra
     }
     ellipse(w + s, h * 45.5, 15);
     s = 25 * i;
@@ -398,7 +398,7 @@ function draw() {
   console.log("daspo totale " + daspo_counter);
 
   ///////cambio cartella //////////////////////////////////////////////////
-  if (testo == 130) {
+  if (testo == 133) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   } else if (testo == 26 || testo < 26) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra

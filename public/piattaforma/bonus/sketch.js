@@ -2,13 +2,13 @@
 let socket = io(); //setting server
 //Coundown
 var testo = 180; //valore countdown
-let testi_ingresso;
 // variabili BONUS ///
 let bonus_preso = 0;
 let contBonus = 0;
 
 let icon;
-let w, h, s; //posizione
+let w, h, s;
+let i=0; //posizione
 
 ////////////////COMUNICAZIONE SERVER/////////////////////////////////////
 // RICEZIONE
@@ -38,7 +38,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(12); //rallenta
-  testo_ingresso = testo;
+
 }
 /////////////////////////////////////////////////////////////////////////
 function draw() {
@@ -51,7 +51,14 @@ function draw() {
           b_tot: bonus_preso,
         }
           socket.emit("bonusOut",message);
-    }
+
+      if (frameCount % 50 == 0) { //multiplo di 50 incrementa i
+        i++;
+      }
+///////cambio cartella //////////////////////////////////////////////////
+if(i = 15 ){
+         window.open('../indexPausa.html', '_self');
+       }
 
   background('#887b86');//scuro
   imageMode(CENTER); //per pittogrammi
@@ -106,11 +113,9 @@ pop();
     s = 30 * i;
   }
 
-///////cambio cartella //////////////////////////////////////////////////
-if(testo == testo_ingresso +2){
-   window.open('indexPausa.html','_self');
 }
-}
+
+
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
