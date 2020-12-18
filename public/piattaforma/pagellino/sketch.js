@@ -1,10 +1,23 @@
+// Server
+let socket = io(); //setting server
+
+//Coundown
+var testo = 180; //valore countdown
+
 let b1, b2, button_text, valutazione, bordo;
 let w, h, s, xBarra, logor, daspoIcon;
 let i = 0;
 let h1, h2;
 let p_s, p_t, p_e, p_c; //percentuali
-let daspo = 0;
+//let daspoPag = 0;
+let daspo_counter = 0; //variabile che conta il numero di daspo
 
+//UPDATE DASPO
+socket.on("daspoIn", updateDaspo);
+
+function updateDaspo(dataReceived) {
+  daspo_counter = dataReceived;
+}
 //////////////////////////////////////////////////////
 
 function preload() {
@@ -20,6 +33,12 @@ function setup() {
   frameRate(15); //rallenta
   h1 = 'Ecco il tuo';
   h2 = 'pagellino da tifoso';
+  ///  coordinazioni
+p_s= round(random(15,70));
+p_t= round(random(70,100));
+p_e= round(random(30,80));
+p_c= round((p_s +p_t +p_e)/3);
+
 }
 
 /////////////////////////////////////////////////////
@@ -70,14 +89,15 @@ imageMode(CORNER)
   b2.mousePressed(back);
   b2.id('pauseBtn')
 
-  ///  coordinazioni
-p_s= 25;
-p_t= 70;
-p_e= 21;
-p_c= 52;
+//
+// if (daspo_counter == 0) {
+//       daspoPag = 1;
+//     } else if (daspo_counter == 1) {
+//       daspoPag = 0;
+//     }
+
 
   push();
-
   fill('#877B85'); //4° colore PALETTE
   textSize(16);
   text(valutazione,  w * 8.6, h * 31.5);
@@ -115,8 +135,8 @@ p_c= 52;
         rectMode(CENTER);
         noStroke();
         rect(w * 11, h * 27.4, w*2, 6, p_t);
-        //xBarra = ((width / 3.5) / 100) * p_coord; //altezza barra %, xTot= 439 = width / 3.5
-        xBarra = ((w*2) / 100) * 70; //25%
+        //a = ((width / 3.5) / 100) * p_coord; //altezza barra %, xTot= 439 = width / 3.5
+        xBarra = ((w*2) / 100) * p_t; //25%
         push();
         rectMode(CORNER);
         fill('#877B85'); //barra viola
@@ -130,7 +150,7 @@ p_c= 52;
         noStroke();
         rect(w * 11, h * 29.6, w*2, 6, 20);
         //xBarra = ((width / 3.5) / 100) * p_coord; //altezza barra %, xTot= 439 = width / 3.5
-        xBarra = ((w*2) / 100) * p_c; //
+        xBarra = ((w*2) / 100) * p_e; //
         push();
         rectMode(CORNER);
         fill('#877B85'); //barra viola
@@ -144,7 +164,7 @@ p_c= 52;
             noStroke();
             rect(w * 11, h * 33.5, w*2, 6, 20);
             //xBarra = ((width / 3.5) / 100) * p_coord; //altezza barra %, xTot= 439 = width / 3.5
-            xBarra = ((w*2) / 100) * 52; //
+            xBarra = ((w*2) / 100) * p_c; //
             push();
             rectMode(CORNER);
             fill('#877B85'); //barra viola
@@ -152,9 +172,9 @@ p_c= 52;
             rect(w * 11 - w, h * 33.5 - 3, xBarra, 6, 20);
             pop();
 
-      if( daspo == 0){
+      if( daspo_counter == 0){
         valutazione = 'Tifo CURATO';
-      } else if (daspo == 1) {
+      } else if (daspo_counter>0) {
         valutazione = 'Tifo ROZZO';
         push();
         fill(249,249, 248, 225)
@@ -176,13 +196,13 @@ function back() {
   window.open('../indexPausa.html', '_self');
 }
 
- function mousePressed(){
-   if (daspo == 0) {
-     daspo = 1;
-   } else if (daspo == 1) {
-     daspo = 0;
-   }
- }
+ // function mousePressed(){
+ //   if (daspo == 0) {
+ //     daspoPag = 1;
+ //   } else if (daspo == 1) {
+ //     daspoPag = 0;
+ //   }
+ // }
 
 
 function windowResized() {
