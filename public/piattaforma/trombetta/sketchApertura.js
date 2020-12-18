@@ -17,7 +17,6 @@ function updateTesto(dataReceived) {
   testo = dataReceived //assegna a testo dati da server
 }
 /////////////////////////////////////////////////////////////////////////
-
 function preload() {
   logoIcon = loadImage("./assets/immagini/logopausa.png");
   tIcon = loadImage("./assets/immagini/trombetta.png"); //trombetta chiara
