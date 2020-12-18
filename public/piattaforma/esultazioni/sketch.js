@@ -111,6 +111,7 @@ function setup() {
 /////////////////////////////////////////////////////////////////////////////
 
 function draw() {
+
   background('#F9F9F9'); //chiaro
   imageMode(CENTER); //per pittogrammi
   noStroke();
@@ -148,15 +149,7 @@ function draw() {
   rect(w * 10 - width / 7, h * 45.5 - 7.5, xBarra, 15, 20);
   pop();
 
-  ///////cambio cartella //////////////////////////////////////////////////
-  if (testo == 100 || testo == 99) {
-    window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
-  } else if (testo == 8 || testo < 8) {
-    window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
-  }
-  //////////////////////////////////////////////////////////////////
-
-  ///////////////BONUS/////////////////////////////////////////////////////////////
+///////////////BONUS/////////////////////////////////////////////////////////////
 //pallini BONUS
   for (let i = 0; i < 4; i++) {
       ellipse(w + s, h * 45.5, 15);
@@ -326,7 +319,13 @@ function draw() {
   if (i > i_ritardo + 2) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   }
-
+  ///////cambio cartella //////////////////////////////////////////////////
+  if (testo == 100 || (testo < 99  && testo > 80) ) {
+    window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
+  } else if (testo == 6 || testo < 6) {
+    window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
+  }
+  
   push();
   textAlign(CORNER);
   fill('#B7AEB5'); //3° PALETTE

@@ -389,7 +389,7 @@ function draw() {
   console.log("daspo totale " + daspo_counter);
 
   ///////cambio cartella //////////////////////////////////////////////////
-  if (testo == 130 || testo < 130) {
+  if (testo == 145 || testo < 145) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   }
   //////////////////////////////////////////////////////////////////

@@ -52,7 +52,7 @@ function draw() {
 
 if(testo == 126){
      window.open('index.html','_self');
-  } else if(testo == 13 || testo < 13){
+  } else if(testo == 14 || testo < 14){
    window.open('index.html','_self');
 }
 }

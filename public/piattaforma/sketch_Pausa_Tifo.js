@@ -53,9 +53,9 @@ function draw() {
       window.open('esultazioni/indexApertura.html', '_self');
     } else if (testo == 89) {
       window.open('sciarpata/indexApertura.html', '_self');
-    } else if (testo == 18) {
+    } else if (testo == 16) {
       window.open('esultazioni/indexApertura.html', '_self');
-    }else if (testo == 2|| testo < 2 || testo == "finish") {
+    }else if (testo == "finish") {
       window.open('pagellino/index.html', '_self');
     }
 

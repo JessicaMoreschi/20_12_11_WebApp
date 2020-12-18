@@ -14,7 +14,6 @@ let daspo_counter = 0; //variabile che conta il numero di daspo
 
 //UPDATE DASPO
 socket.on("daspoIn", updateDaspo);
-
 function updateDaspo(dataReceived) {
   daspo_counter = dataReceived;
 }
@@ -44,6 +43,7 @@ p_c= round((p_s +p_t +p_e)/3);
 /////////////////////////////////////////////////////
 
 function draw() {
+
   background('#F9F9F9'); //chiaro
   //CONTATORE i DEL TEMPO
   if (frameCount % 15 == 0) { //multiplo di 50 incrementa i
@@ -88,14 +88,6 @@ imageMode(CORNER)
   b2.position(w, h * 4.5);
   b2.mousePressed(back);
   b2.id('pauseBtn')
-
-//
-// if (daspo_counter == 0) {
-//       daspoPag = 1;
-//     } else if (daspo_counter == 1) {
-//       daspoPag = 0;
-//     }
-
 
   push();
   fill('#877B85'); //4° colore PALETTE
@@ -171,10 +163,10 @@ imageMode(CORNER)
             //width/7 è la metà della barra, che è lunga width/3.5
             rect(w * 11 - w, h * 33.5 - 3, xBarra, 6, 20);
             pop();
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       if( daspo_counter == 0){
         valutazione = 'Tifo CURATO';
-      } else if (daspo_counter>0) {
+      } else if (daspo_counter =!0) {
         valutazione = 'Tifo ROZZO';
         push();
         fill(249,249, 248, 225)
@@ -195,15 +187,6 @@ function p() {
 function back() {
   window.open('../indexPausa.html', '_self');
 }
-
- // function mousePressed(){
- //   if (daspo == 0) {
- //     daspoPag = 1;
- //   } else if (daspo == 1) {
- //     daspoPag = 0;
- //   }
- // }
-
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
