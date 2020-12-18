@@ -61,7 +61,7 @@ function draw() {
   textSize(25);
   fill('#887b86');
   text('', width/12*5,inc+(height/7));
-  text('ATTACCO', width/12*5,inc+(height/7+height/7));
+  text('INIZIO', width/12*5,inc+(height/7+height/7));
   text('PALLA RECUPERATA', width/12*5,inc+(height/7+2*height/7));
   text('', width/12*5,inc+(height/7+3*height/7));
   text('TIRI TOTALI', width/12*5,inc+(height/7+4*height/7));
