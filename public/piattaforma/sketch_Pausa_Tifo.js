@@ -47,7 +47,7 @@ function draw() {
     i++;
   }
   //if (mouseIsPressed) {
-    if (testo == 155) {
+    if (testo == 158) {
       window.open('trombetta/indexApertura.html', '_self');
     } else if (testo == 128) {
       window.open('esultazioni/indexApertura.html', '_self');
@@ -55,7 +55,7 @@ function draw() {
       window.open('sciarpata/indexApertura.html', '_self');
     } else if (testo == 18) {
       window.open('esultazioni/indexApertura.html', '_self');
-    }else if (testo == 3|| testo < 3 ) {
+    }else if (testo == 2|| testo < 2 || testo = "finish") {
       window.open('pagellino/index.html', '_self');
     }
 
