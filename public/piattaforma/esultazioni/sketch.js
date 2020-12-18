@@ -147,10 +147,11 @@ function draw() {
   //width/7 è la metà della barra, che è lunga width/3.5
   rect(w * 10 - width / 7, h * 45.5 - 7.5, xBarra, 15, 20);
   pop();
+
   ///////cambio cartella //////////////////////////////////////////////////
   if (testo == 100) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
-  } else if (testo == 4 || testo < 4) {
+  } else if (testo == 5 || testo < 5) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   }
   //////////////////////////////////////////////////////////////////
@@ -160,7 +161,6 @@ function draw() {
 
   if (p_coord > 55) {
     contBonus +=1;
-  }
 
     //EMIT BONUS
     let message = {
@@ -168,6 +168,9 @@ function draw() {
       b_tot: bonus_preso,
     }
     socket.emit("bonusOut", message);
+  }
+
+
 
   //pallini BONUS
   for (let i = 0; i < 4; i++) {
