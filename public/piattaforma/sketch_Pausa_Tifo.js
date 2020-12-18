@@ -53,9 +53,7 @@ function draw() {
       window.open('esultazioni/indexApertura.html', '_self');
     } else if (testo == 89) {
       window.open('sciarpata/indexApertura.html', '_self');
-    } else if (testo == 60) {
-      window.open('trombetta2/indexApertura.html', '_self');
-    } else if (testo == 16) {
+    } else if (testo == 18) {
       window.open('esultazioni/indexApertura.html', '_self');
     }else if (testo == 3|| testo < 3 ) {
       window.open('pagellino/index.html', '_self');

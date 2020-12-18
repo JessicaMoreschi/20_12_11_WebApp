@@ -149,30 +149,15 @@ function draw() {
   pop();
 
   ///////cambio cartella //////////////////////////////////////////////////
-  if (testo == 100) {
+  if (testo == 100 || testo == 99) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
-  } else if (testo == 5 || testo < 5) {
+  } else if (testo == 8 || testo < 8) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   }
   //////////////////////////////////////////////////////////////////
 
-  ///////////////BONUS//////////////////////////////////////////////////////////////
-  //pallini BONUS
-
-  if (p_coord > 55) {
-    contBonus +=1;
-
-    //EMIT BONUS
-    let message = {
-      bonus: contBonus,
-      b_tot: bonus_preso,
-    }
-    socket.emit("bonusOut", message);
-  }
-
-
-
-  //pallini BONUS
+  ///////////////BONUS/////////////////////////////////////////////////////////////
+//pallini BONUS
   for (let i = 0; i < 4; i++) {
       ellipse(w + s, h * 45.5, 15);
       s = 25 * i;
@@ -326,6 +311,16 @@ function draw() {
   if (input_utente == 1 && i > i_ritardo + 1) {
     p_coord = round(random(10, 80));
     input_utente = 0;
+    if (p_coord > 55) {
+      contBonus ++;
+
+      //EMIT BONUS
+      let message = {
+        bonus: contBonus,
+        b_tot: bonus_preso,
+      }
+      socket.emit("bonusOut", message);
+    }
   }
 
   if (i > i_ritardo + 2) {

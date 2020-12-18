@@ -55,7 +55,7 @@ function draw() {
   fill('#B7AEB5'); //3 PALETTE
   text('PREPARATI A TIFARE', width / 2, height / 6*5.1 );
 
-if(testo == 153 || testo <153){
+if(testo == 152 || testo <152){
    window.open('index.html','_self');
 }
 
