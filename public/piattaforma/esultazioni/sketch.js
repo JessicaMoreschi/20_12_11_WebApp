@@ -150,7 +150,7 @@ function draw() {
   ///////cambio cartella //////////////////////////////////////////////////
   if (testo == 100) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
-  } else if (testo == 3 || testo < 3) {
+  } else if (testo == 4 || testo < 4) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   }
   //////////////////////////////////////////////////////////////////

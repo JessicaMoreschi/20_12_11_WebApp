@@ -51,13 +51,13 @@ function draw() {
       window.open('trombetta/indexApertura.html', '_self');
     } else if (testo == 128) {
       window.open('esultazioni/indexApertura.html', '_self');
-    } else if (testo == 91) {
+    } else if (testo == 89) {
       window.open('sciarpata/indexApertura.html', '_self');
     } else if (testo == 60) {
       window.open('trombetta2/indexApertura.html', '_self');
-    } else if (testo == 10) {
+    } else if (testo == 12) {
       window.open('esultazioni/indexApertura.html', '_self');
-    }else if (testo == 1|| testo < 1 ) {
+    }else if (testo == 2|| testo < 2 ) {
       window.open('pagellino/index.html', '_self');
     }
 
