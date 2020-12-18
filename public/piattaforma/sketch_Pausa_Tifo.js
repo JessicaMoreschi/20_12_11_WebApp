@@ -55,7 +55,7 @@ function draw() {
       window.open('sciarpata/indexApertura.html', '_self');
     } else if (testo == 18) {
       window.open('esultazioni/indexApertura.html', '_self');
-    }else if (testo == 2|| testo < 2 || testo = "finish") {
+    }else if (testo == 2|| testo < 2 || testo == "finish") {
       window.open('pagellino/index.html', '_self');
     }
 
