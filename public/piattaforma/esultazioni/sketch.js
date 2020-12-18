@@ -346,7 +346,7 @@ function draw() {
 
   //DASPO
   //daspo condizione
-  if (vol_1 > 70 && i > 1 && daspo == false) {
+  if (vol_1 > 50 && i > 1 && daspo == false) {
     daspo = true;
     daspo_counter++;
     secondo_corrente = testo;
