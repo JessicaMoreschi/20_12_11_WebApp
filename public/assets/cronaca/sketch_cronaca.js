@@ -42,6 +42,10 @@ function draw() {
   text("TM1", width/12*5.5,inc+(height/7+11*height/7));
   text("TM1", width/12*5.5,inc+(height/7+12*height/7));
   text("TM1", width/12*5.5,inc+(height/7+15*height/7));
+  text("TM1", width/12*5.5,inc+(height/7+16*height/7));
+  text("TM1", width/12*5.5,inc+(height/7+17*height/7));
+
+
   pop()
   //minuto dx
   push();
@@ -57,6 +61,8 @@ function draw() {
   text("TM2", width/12*6.5,inc+(height/7+10*height/7));
   text("TM2", width/12*6.5,inc+(height/7+12*height/7));
   text("TM2", width/12*6.5,inc+(height/7+15*height/7));
+  text("TM2", width/12*6.5,inc+(height/7+18*height/7));
+
   pop()
 
   //testo sx
@@ -74,7 +80,8 @@ function draw() {
   text('CORNER – FUORI', width/12*5,inc+(height/7+11*height/7));
   text('FINE PRIMO TEMPO', width/12*5,inc+(height/7+12*height/7));
   text('INIZIO SECONDO TEMPO', width/12*5,inc+(height/7+15*height/7));
-
+  text('PALLA RECUPERATA', width/12*5,inc+(height/7+16*height/7));
+  text('TIRO IN PORTA – FUORI', width/12*5,inc+(height/7+17*height/7));
 
   pop()
   //testo dx
@@ -88,6 +95,7 @@ function draw() {
   text('PALLA RECUPERATA', width/12*7,inc+(height/7+7*height/7));
   text('TIRO IN PORTA – FUORI', width/12*7,inc+(height/7+8*height/7));
   text('PALLA RECUPERATA', width/12*7,inc+(height/7+10*height/7));
+  text('ATTACCO PERICOLOSO', width/12*7,inc+(height/7+18*height/7));
 
 
   pop()
@@ -110,7 +118,9 @@ function draw() {
   rect(width/12,inc+(height/7+height/7*10.4),sliderWidth,1,1);
   rect(width/12,inc+(height/7+height/7*11.4),sliderWidth,1,1);
   rect(width/12,inc+(height/7+height/7*14.4),sliderWidth,1,1);
-
+  rect(width/12,inc+(height/7+height/7*15.4),sliderWidth,1,1);
+  rect(width/12,inc+(height/7+height/7*16.4),sliderWidth,1,1);
+  rect(width/12,inc+(height/7+height/7*17.4),sliderWidth,1,1);
 
 
   pop()
@@ -147,6 +157,10 @@ function draw() {
   push();fill('#887b86');ellipse(width/2,inc+(height/7+height/7*11-height/100),height/15);pop()
   push();fill('#887b86');ellipse(width/2,inc+(height/7+height/7*12-height/100),height/15);pop()
   push();fill('#D6D1D3');ellipse(width/2,inc+(height/7+height/7*15-height/100),height/15);pop()
+  push();fill('#887b86');ellipse(width/2,inc+(height/7+height/7*16-height/100),height/15);pop()
+  push();fill('#887b86');ellipse(width/2,inc+(height/7+height/7*17-height/100),height/15);pop()
+  push();fill('#D6D1D3');ellipse(width/2,inc+(height/7+height/7*18-height/100),height/15);pop()
+
   pop()
 
   //MINUTO
@@ -169,7 +183,9 @@ function draw() {
   text("102'", width/2,inc+(height/7+11*height/7));
   text("90'", width/2,inc+(height/7+12*height/7));
   text("89'", width/2,inc+(height/7+15*height/7));
-
+  text("84'", width/2,inc+(height/7+16*height/7));
+  text("74'", width/2,inc+(height/7+17*height/7));
+  text("61'", width/2,inc+(height/7+18*height/7));
 
   pop()
 
