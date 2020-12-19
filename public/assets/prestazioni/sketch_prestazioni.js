@@ -45,6 +45,72 @@ function setup() {
   prevY1=height/2;
   y2=height/2;
   prevY2=height/2;
+}
+
+function draw() {
+  let iterator = (180-testo)/100
+  let noiseVal = noise(iterator) * height/100;
+  let inc;
+  //condizioni tempo
+  if ((testo<166 && testo>152)||(testo<145 && testo>141)||(testo<123 && testo>104)||(testo<84 && testo>36)||(testo<23 && testo>5)) {
+    inc = -noiseVal
+  } else {
+    inc = noiseVal
+  }
+
+  //incremento x-y
+  x1 = map(testo,180,0,width/100*2.5,width/2);
+  if (prevTesto!==testo) {
+    y1+=inc;
+  }
+  x2 = map(testo,180,0,width/2,width-(width/100*2.5));
+  if (prevTesto!==testo) {
+    y2-=inc;
+  }
+
+  //riempimento sx
+  push()
+  noStroke()
+  fill('#D6D1D3')
+  beginShape();
+  vertex(prevX1-0.1, prevY1);
+  vertex(x1, y1);
+  vertex(x1, height/2);
+  vertex(prevX1-0.1, height/2);
+  endShape(CLOSE);
+  pop()
+  //linea sx
+  push()
+  stroke('#887b86')
+  line(prevX1, prevY1, x1, y1);
+  pop()
+
+  //riempimento dx
+  push()
+  noStroke()
+  fill('#f0efef')
+  beginShape();
+  vertex(prevX2-0.1, prevY2);
+  vertex(x2, y2);
+  vertex(x2, height/2);
+  vertex(prevX2-0.1, height/2);
+  endShape(CLOSE);
+  pop()
+  //linea dx
+  push()
+  stroke('#D6D1D3')
+  line(prevX2, prevY2, x2, y2);
+  pop()
+
+  prevX1=x1;
+  prevY1=y1;
+  prevX2=x2;
+  prevY2=y2;
+  prevTesto=testo
+
+  if (testo==180){
+    setup()
+  }
 
   //performance sx
   push();
@@ -153,73 +219,6 @@ function setup() {
   text("75'", (width/2-(width/100*2.5))/6*5+(width/2),height/5*4);
   text("90'", (width/2-(width/100*2.5))/6*6+(width/2),height/5*4);
   pop()
-}
-
-function draw() {
-  let iterator = (180-testo)/100
-  let noiseVal = noise(iterator) * height/100;
-  let inc;
-  //condizioni tempo
-  if ((testo<166 && testo>152)||(testo<145 && testo>141)||(testo<123 && testo>104)||(testo<84 && testo>36)||(testo<23 && testo>5)) {
-    inc = -noiseVal
-  } else {
-    inc = noiseVal
-  }
-
-  //incremento x-y
-  x1 = map(testo,180,0,width/100*2.5,width/2);
-  if (prevTesto!==testo) {
-    y1+=inc;
-  }
-  x2 = map(testo,180,0,width/2,width-(width/100*2.5));
-  if (prevTesto!==testo) {
-    y2-=inc;
-  }
-
-  //riempimento sx
-  push()
-  noStroke()
-  fill('#D6D1D3')
-  beginShape();
-  vertex(prevX1-0.1, prevY1);
-  vertex(x1, y1);
-  vertex(x1, height/2);
-  vertex(prevX1-0.1, height/2);
-  endShape(CLOSE);
-  pop()
-  //linea sx
-  push()
-  stroke('#887b86')
-  line(prevX1, prevY1, x1, y1);
-  pop()
-
-  //riempimento dx
-  push()
-  noStroke()
-  fill('#f0efef')
-  beginShape();
-  vertex(prevX2-0.1, prevY2);
-  vertex(x2, y2);
-  vertex(x2, height/2);
-  vertex(prevX2-0.1, height/2);
-  endShape(CLOSE);
-  pop()
-  //linea dx
-  push()
-  stroke('#D6D1D3')
-  line(prevX2, prevY2, x2, y2);
-  pop()
-
-  prevX1=x1;
-  prevY1=y1;
-  prevX2=x2;
-  prevY2=y2;
-  prevTesto=testo
-
-  if (testo==180){
-    setup()
-  }
-
 }
 
 

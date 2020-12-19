@@ -97,6 +97,14 @@ if (testo==90) {
   }
 }
 
+//apdate gol
+if (testo==7) {
+  document.getElementById("punt").innerHTML = '1 : 0'
+}
+
+
+
+
 }
 
 
