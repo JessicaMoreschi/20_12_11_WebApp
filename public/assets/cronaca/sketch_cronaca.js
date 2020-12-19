@@ -196,30 +196,30 @@ function draw() {
   textAlign(CENTER);
   textSize(20);
   fill('#F9F9F8');
-  text("180'", width/2,inc+(height/7));
-  text("172'", width/2,inc+(height/7+height/7));
-  text("166'", width/2,inc+(height/7+2*height/7));
-  text("160'", width/2,inc+(height/7+3*height/7));
-  text("155'", width/2,inc+(height/7+4*height/7));
-  text("152'", width/2,inc+(height/7+5*height/7));
-  text("145'", width/2,inc+(height/7+6*height/7));
-  text("143'", width/2,inc+(height/7+7*height/7));
-  text("128'", width/2,inc+(height/7+8*height/7));
-  text("116'", width/2,inc+(height/7+9*height/7));
-  text("106'", width/2,inc+(height/7+10*height/7));
-  text("102'", width/2,inc+(height/7+11*height/7));
+  text("00'", width/2,inc+(height/7));
+  text("08'", width/2,inc+(height/7+height/7));
+  text("14'", width/2,inc+(height/7+2*height/7));
+  text("20'", width/2,inc+(height/7+3*height/7));
+  text("25'", width/2,inc+(height/7+4*height/7));
+  text("28'", width/2,inc+(height/7+5*height/7));
+  text("35'", width/2,inc+(height/7+6*height/7));
+  text("37'", width/2,inc+(height/7+7*height/7));
+  text("52'", width/2,inc+(height/7+8*height/7));
+  text("64'", width/2,inc+(height/7+9*height/7));
+  text("74'", width/2,inc+(height/7+10*height/7));
+  text("82'", width/2,inc+(height/7+11*height/7));
   text("90'", width/2,inc+(height/7+12*height/7));
-  text("89'", width/2,inc+(height/7+15*height/7));
-  text("84'", width/2,inc+(height/7+16*height/7));
-  text("74'", width/2,inc+(height/7+17*height/7));
-  text("63'", width/2,inc+(height/7+18*height/7));
-  text("61'", width/2,inc+(height/7+19*height/7));
-  text("47'", width/2,inc+(height/7+20*height/7));
-  text("36'", width/2,inc+(height/7+21*height/7));
-  text("31'", width/2,inc+(height/7+22*height/7));
-  text("10'", width/2,inc+(height/7+23*height/7));
-  text("07'", width/2,inc+(height/7+24*height/7));
-  text("00'", width/2,inc+(height/7+25*height/7));
+  text("91'", width/2,inc+(height/7+15*height/7));
+  text("96'", width/2,inc+(height/7+16*height/7));
+  text("106'", width/2,inc+(height/7+17*height/7));
+  text("117'", width/2,inc+(height/7+18*height/7));
+  text("119'", width/2,inc+(height/7+19*height/7));
+  text("133'", width/2,inc+(height/7+20*height/7));
+  text("144'", width/2,inc+(height/7+21*height/7));
+  text("149'", width/2,inc+(height/7+22*height/7));
+  text("170'", width/2,inc+(height/7+23*height/7));
+  text("173'", width/2,inc+(height/7+24*height/7));
+  text("180'", width/2,inc+(height/7+25*height/7));
 
   pop()
 
@@ -232,11 +232,13 @@ function draw() {
   rect(0,0,width,height/10);
   pop()
 
-  if (testo=='finish') {
-    inc=-1800
+  if (testo!=='finish') {
+    inc=-(180-testo)*10;
   }
-  inc=-(180-testo)*10;
 
+ if (testo=='finish') {
+    inc=1800
+  }
 }
 
 
