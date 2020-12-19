@@ -139,9 +139,11 @@ function draw() {
   }
 
   ///////cambio cartella //////////////////////////////////////////////////
-  if (testo == 30 || testo < 30) {
+
+  if (testo == 130 || testo < 130) {
     window.open('../indexPausa.html', '_self'); //doppio puntino per andare nella cartella sopra
   }
+
 
   background('#F9F9F9'); //chiaro
   imageMode(CENTER); //per pittogrammi

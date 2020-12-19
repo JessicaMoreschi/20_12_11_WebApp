@@ -47,12 +47,12 @@ function draw() {
     i++;
   }
   //if (mouseIsPressed) {
-    if (testo == 158) {
-      window.open('trombetta/indexApertura.html', '_self');
-    } else if (testo == 128) {
-      window.open('esultazioni/indexApertura.html', '_self');
-    } else if (testo == 89) {
+    if (testo == 160 || testo == 158 testo == 159 ) {
       window.open('sciarpata/indexApertura.html', '_self');
+    } else if (testo == 128 ||testo == 127 || testo == 126) {
+      window.open('esultazioni/indexApertura.html', '_self');
+    } else if (testo == 89 || testo == 88 || testo == 87) {
+      window.open('trombetta/indexApertura.html', '_self');
     } else if (testo == 16) {
       window.open('esultazioni/indexApertura.html', '_self');
     }else if (testo == "finish") {
