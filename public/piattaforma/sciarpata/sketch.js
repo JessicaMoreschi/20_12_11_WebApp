@@ -192,9 +192,8 @@ function draw() {
 
   ///////////////BONUS//////////////////////////////////////////////////////////////
 
-  if (p_coord === 80) {
+  if (p_coord == 75) {
     contBonus++;
-
     //EMIT BONUS
     let message = {
       bonus: contBonus,

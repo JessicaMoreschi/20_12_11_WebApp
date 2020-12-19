@@ -170,7 +170,8 @@ function draw() {
 
   //pallini BONUS
   for (let i = 0; i < 4; i++) {
-
+    ellipse(w + s, h * 45.5, 15);
+    s = 25 * i;
     if (contBonus === 1 ) {
       push();
       fill('#877B85');
@@ -204,8 +205,7 @@ function draw() {
     } else if (contBonus === 5 ) {
       window.open('../bonus/index.html', '_self');
     }
-    ellipse(w + s, h * 45.5, 15);
-    s = 25 * i;
+
   }
 
   ///////////////////////////////////////////////////////////////

@@ -29,7 +29,7 @@ function setup() {
 }
 /////////////////////////////////////////////////////////////////////////
 function draw() {
-  if(testo == 158 || testo < 158){
+  if(testo == 163 || testo < 163){
      window.open('index.html','_self');
   }
 
