@@ -45,6 +45,83 @@ function setup() {
   prevY1=height/2;
   y2=height/2;
   prevY2=height/2;
+
+  //performance sx
+  push();
+  textFont('Quicksand', BOLD);
+  textAlign(LEFT);
+  textSize(13);
+  fill('#887b86');
+  text("PRESTAZIONI TEAM1", (width/2-(width/100*2.5))/6*0+(width/100*2.5),height/5*0.75);
+  pop()
+  push()
+  textFont('Quicksand', BOLD);
+  textAlign(CENTER);
+  textSize(13);
+  fill('#887b86');
+  text("+", (width/2-(width/100*2.5))/6*0+(width/100*2.5)/2,height/5*2.126);
+  text("–", (width/2-(width/100*2.5))/6*0+(width/100*2.5)/2,height/5*3.126);
+  pop()
+  push()
+  ellipseMode(CENTER);
+  noFill();
+  strokeCap(1);
+  stroke('#887b86');
+  ellipse((width/2-(width/100*2.5))/6*0+(width/100*2.5)/2,height/5*2, 10)
+  ellipse((width/2-(width/100*2.5))/6*0+(width/100*2.5)/2,height/5*3, 10)
+  pop()
+  //testo sx
+  push();
+  textFont('Quicksand', BOLD);
+  textAlign(CENTER);
+  textSize(10);
+  fill('#887b86');
+  text("00'", (width/2-(width/100*2.5))/6*0+(width/100*2.5),height/5*4);
+  text("15'", (width/2-(width/100*2.5))/6*1+(width/100*2.5),height/5*4);
+  text("30'", (width/2-(width/100*2.5))/6*2+(width/100*2.5),height/5*4);
+  text("45'", (width/2-(width/100*2.5))/6*3+(width/100*2.5),height/5*4);
+  text("60'", (width/2-(width/100*2.5))/6*4+(width/100*2.5),height/5*4);
+  text("75'", (width/2-(width/100*2.5))/6*5+(width/100*2.5),height/5*4);
+  pop()
+  //performance dx
+
+push();
+  textFont('Quicksand', BOLD);
+  textAlign(RIGHT);
+  textSize(13);
+  fill('#887b86');
+  text("TEAM2 PRESTAZIONI", width-(width/100*2.5),height/5*0.75);
+  pop()
+  push();
+  textFont('Quicksand', BOLD);
+  textAlign(CENTER);
+  textSize(13);
+  fill('#887b86');
+  text("+", width-(width/100*2.5)+(width/100*2.5)/2,height/5*2.126);
+  text("–", width-(width/100*2.5)+(width/100*2.5)/2,height/5*3.126);
+  pop()
+  push()
+  ellipseMode(CENTER);
+  noFill();
+  strokeCap(1);
+  stroke('#887b86');
+  ellipse(width-(width/100*2.5)+(width/100*2.5)/2,height/5*2, 10)
+  ellipse(width-(width/100*2.5)+(width/100*2.5)/2,height/5*3, 10)
+  pop()
+  //testo dx
+
+  push();
+  textFont('Quicksand', BOLD);
+  textAlign(CENTER);
+  textSize(10);
+  fill('#887b86');
+  text("15'", (width/2-(width/100*2.5))/6+(width/2),height/5*4);
+  text("30'", (width/2-(width/100*2.5))/6*2+(width/2),height/5*4);
+  text("45'", (width/2-(width/100*2.5))/6*3+(width/2),height/5*4);
+  text("60'", (width/2-(width/100*2.5))/6*4+(width/2),height/5*4);
+  text("75'", (width/2-(width/100*2.5))/6*5+(width/2),height/5*4);
+  text("90'", (width/2-(width/100*2.5))/6*6+(width/2),height/5*4);
+  pop()
 }
 
 function draw() {
@@ -112,31 +189,6 @@ function draw() {
     setup()
   }
 
-  //performance sx
-  push();
-  textFont('Quicksand', BOLD);
-  textAlign(LEFT);
-  textSize(13);
-  fill('#887b86');
-  text("PRESTAZIONI TEAM1", (width/2-(width/100*2.5))/6*0+(width/100*2.5),height/5*0.75);
-  pop()
-  push()
-  textFont('Quicksand', BOLD);
-  textAlign(CENTER);
-  textSize(13);
-  fill('#887b86');
-  text("+", (width/2-(width/100*2.5))/6*0+(width/100*2.5)/2,height/5*2.126);
-  text("–", (width/2-(width/100*2.5))/6*0+(width/100*2.5)/2,height/5*3.126);
-  pop()
-  push()
-  ellipseMode(CENTER);
-  noFill();
-  strokeCap(1);
-  stroke('#887b86');
-  ellipse((width/2-(width/100*2.5))/6*0+(width/100*2.5)/2,height/5*2, 10)
-  ellipse((width/2-(width/100*2.5))/6*0+(width/100*2.5)/2,height/5*3, 10)
-  pop()
-
   //linee sx
   push()
   strokeWeight(0.5);
@@ -151,49 +203,14 @@ function draw() {
   line(width/100*2.5,height/2,width-(width/100*2.5),height/2);
 
   pop()
-  //testo sx
-  push();
-  textFont('Quicksand', BOLD);
-  textAlign(CENTER);
-  textSize(10);
-  fill('#887b86');
-  text("00'", (width/2-(width/100*2.5))/6*0+(width/100*2.5),height/5*4);
-  text("15'", (width/2-(width/100*2.5))/6*1+(width/100*2.5),height/5*4);
-  text("30'", (width/2-(width/100*2.5))/6*2+(width/100*2.5),height/5*4);
-  text("45'", (width/2-(width/100*2.5))/6*3+(width/100*2.5),height/5*4);
-  text("60'", (width/2-(width/100*2.5))/6*4+(width/100*2.5),height/5*4);
-  text("75'", (width/2-(width/100*2.5))/6*5+(width/100*2.5),height/5*4);
-  pop()
+
   //line centro
   push()
   strokeWeight(1);
   stroke('#887b86');
   line(width/2,height/10,width/2,height/10*9);
   pop()
-  //performance dx
-  push();
-  textFont('Quicksand', BOLD);
-  textAlign(RIGHT);
-  textSize(13);
-  fill('#887b86');
-  text("TEAM2 PRESTAZIONI", width-(width/100*2.5),height/5*0.75);
-  pop()
-  push();
-  textFont('Quicksand', BOLD);
-  textAlign(CENTER);
-  textSize(13);
-  fill('#887b86');
-  text("+", width-(width/100*2.5)+(width/100*2.5)/2,height/5*2.126);
-  text("–", width-(width/100*2.5)+(width/100*2.5)/2,height/5*3.126);
-  pop()
-  push()
-  ellipseMode(CENTER);
-  noFill();
-  strokeCap(1);
-  stroke('#887b86');
-  ellipse(width-(width/100*2.5)+(width/100*2.5)/2,height/5*2, 10)
-  ellipse(width-(width/100*2.5)+(width/100*2.5)/2,height/5*3, 10)
-  pop()
+
   //linee dx
   push()
   strokeWeight(0.5);
@@ -206,19 +223,8 @@ function draw() {
   line((width/2-(width/100*2.5))/6*5+(width/2),height/5*1.5,(width/2-(width/100*2.5))/6*5+(width/2),height/5*3.5);
   line(width-(width/100*2.5),height/5*1.5,width-(width/100*2.5),height/5*3.5);
   pop()
-  //testo dx
-  push();
-  textFont('Quicksand', BOLD);
-  textAlign(CENTER);
-  textSize(10);
-  fill('#887b86');
-  text("15'", (width/2-(width/100*2.5))/6+(width/2),height/5*4);
-  text("30'", (width/2-(width/100*2.5))/6*2+(width/2),height/5*4);
-  text("45'", (width/2-(width/100*2.5))/6*3+(width/2),height/5*4);
-  text("60'", (width/2-(width/100*2.5))/6*4+(width/2),height/5*4);
-  text("75'", (width/2-(width/100*2.5))/6*5+(width/2),height/5*4);
-  text("90'", (width/2-(width/100*2.5))/6*6+(width/2),height/5*4);
-  pop()
+
+
 }
 
 
