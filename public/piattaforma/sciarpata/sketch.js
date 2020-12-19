@@ -285,9 +285,8 @@ function draw() {
 
     document.getElementById("tutorial2").style.display = "none";
     image(sciarpaIcon, w * 10, h * 25, sciarpaIcon.width / 6, sciarpaIcon.height / 6); // scura
-    if (topPrediction == 'up') {
-      feed_piattaforma++;
-    }
+    feed_piattaforma++;
+
   }
 
   //rettangolo in opacità
