@@ -219,7 +219,7 @@ function draw() {
 
   // BARRETTE FEED UTENTE (LINETTE)
   for (var x = w * 3.8; x < w * 8.8; x += 40) {
-    if (keyIsDown(ENTER) && daspo == false) {
+    if (inData == 49 && daspo == false || keyIsDown(ENTER) && daspo == false) {
       alt = 1 * random(1, 8.5);
       input_utente = 250;
       pulsazione = 0;
@@ -235,7 +235,7 @@ function draw() {
   }
 
   //PER LA BARRA DELLA PERCENTUALE
-  if (keyIsDown(ENTER)) {
+  if (inData == 49 || keyIsDown(ENTER)) {
     p_coord = round((feed_piattaforma * input_utente) / 100);
   } else {
     p_coord = 0;
@@ -303,7 +303,7 @@ function draw() {
     tut2Icon.reset();
     text('Segui il ritmo degli altri', w * 10, h * 31);
     let pronto = false;
-    if (keyIsDown(ENTER)) {
+    if (inData == 49 || keyIsDown(ENTER)) {
       text('NON COORDINATO', w * 10, h * 33);
     }
   } else if (i == 1 || i == 3) {
@@ -311,7 +311,7 @@ function draw() {
     text('Segui il ritmo degli altri', w * 10, h * 31);
     let pronto = true;
 
-    if (keyIsDown(ENTER)) {
+    if (inData == 49 || keyIsDown(ENTER)) {
       text('CORRETTO', w * 10, h * 33);
     }
   }
@@ -319,7 +319,7 @@ function draw() {
   //////DASPO
 
   //daspo condizione
-  if (keyIsDown(ENTER) && i % 2 == 0 && i > 5 && j > 10 && daspo == false) {
+  if (inData == 49 && i % 2 == 0 && i > 5 && j > 10 && daspo == false || keyIsDown(ENTER) && i % 2 == 0 && i > 5 && j > 10 && daspo == false) {
     daspo = true;
     daspo_counter++;
     secondo_corrente = testo;
