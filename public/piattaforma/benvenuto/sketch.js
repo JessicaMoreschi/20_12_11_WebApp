@@ -43,9 +43,9 @@ function preload() {
   imm4 = loadImage("./assets/scaramanzia.png");
   testo_privacy = loadImage("./assets/testo.png");
   strumenti = loadImage("./assets/strumenti.png");
-  tut1 = loadImage("./assets/Tutorial_Trombetta2.gif");
-  tut2 = loadImage("./assets/Tutorial-sciarpa-su.gif");
-  tut3 = loadImage("./assets/barretteParola.gif");
+  tut1 = loadImage("./assets/Tutorial_Trombetta.gif");
+  tut2 = loadImage("./assets/Tutorial_Sciarpata.gif");
+  tut3 = loadImage("./assets/Tutorial_puntini.gif");
 
 }
 
@@ -281,8 +281,10 @@ function draw() {
     image(tut1, w * 10, height / 50 * 27, tut1.width / 5.5, tut1.height /5.5);//cornice strumenti
     image(tut2, w * 7.5, height / 50 * 27, tut2.width / 5.5, tut2.height /5.5);//cornice strumenti
     image(tut3, w * 12.5, height / 50 * 27, tut3.width / 5.5, tut3.height /5.5);//cornice strumenti
-    tut1.reset();
-      tut2.reset();
+    //
+     tut1.reset();
+     tut2.reset();
+     tut3.reset();
 
     xBarra = ((width / 3.5) / 100) * 100;
     push();
