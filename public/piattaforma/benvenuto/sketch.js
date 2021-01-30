@@ -3,7 +3,7 @@ let socket = io(); //setting server
 
 let logoIcon, benvenuto, imm_condizioni;
 let b1, b2, button_text, testo_privacy, stadio;
-let imm1, imm2, imm3, imm4, strumenti, tut1, tut2, tut3;
+let imm1, imm2, imm3, imm4, strumenti;
 let w, h, s, xBarra, logor;
 let i = 0;
 let pag = 0;
@@ -14,9 +14,6 @@ let divieto = 'NESSUNA ESUBERANZA';//ELOGIA IL CONTENIMENTO
 let sotto_divieto1 = 'Mantenere gesti e volume controllati: non sarà necessario'
 let sotto_divieto2 = 'sbracciarsi o fare schiamazzi di alcun tipo.'
 let step = 'step 1/3';
-
-// let bonus_preso = 1;
-// let contBonus = 12; //conta quando p_coord arriva a 100
 
 // RICEZIONE BONUS
 socket.on("bonusIn", bonusServer);
@@ -43,9 +40,6 @@ function preload() {
   imm4 = loadImage("./assets/scaramanzia.png");
   testo_privacy = loadImage("./assets/testo.png");
   strumenti = loadImage("./assets/strumenti.png");
-  tut1 = loadImage("./assets/Tutorial_Trombetta.gif");
-  tut2 = loadImage("./assets/Tutorial_Sciarpata.gif");
-  tut3 = loadImage("./assets/Tutorial_puntini.gif");
 
 }
 
@@ -62,9 +56,6 @@ function setup() {
 
 /////////////////////////////////////////////////////////////////////////
 function draw() {
-  // //EMIT BONUS
-  //   socket.emit("bonusOut", contBonus);
-  //   socket.emit("bonusTotOut", bonus_preso);
 
   //CONTATORE i DEL TEMPO
   if (frameCount % 2 == 0) { //multiplo di 50 incrementa i
@@ -85,7 +76,7 @@ function draw() {
     textStyle(BOLD);
 
     textSize(15);
-    text('IL VERO TIFO', w * 10, h * 19.3);
+    text('IL VERO TIFO', w * 10, h * 18.3);
     //testo centrale
     textSize(30);
     fill('#B7AEB5'); //3° PALETTE
@@ -268,6 +259,11 @@ function draw() {
     text(step, w * 10, h * 10);
     //text('HO LETTO E ACCETTATO L’INFORMATIVA PRIVACY', w * 10, h * 38);
     document.getElementById("container").style.display = 'flex';
+
+    document.getElementById("tut1").style.display = "none";
+      document.getElementById("tut2").style.display = "none";
+        document.getElementById("tut3").style.display = "none";
+
     pop();
 
   } else if (pag == 6) { //////////////////////////////////////////////// STRUMENTI DEL TIFO
@@ -278,13 +274,10 @@ function draw() {
     step = ' step 3/3';
     image(strumenti, w * 10, height / 50 * 29, strumenti.width / 1.5, strumenti.height / 1.5);//cornice strumenti
 
-    image(tut1, w * 10, height / 50 * 27, tut1.width / 5.5, tut1.height /5.5);//cornice strumenti
-    image(tut2, w * 7.5, height / 50 * 27, tut2.width / 5.5, tut2.height /5.5);//cornice strumenti
-    image(tut3, w * 12.5, height / 50 * 27, tut3.width / 5.5, tut3.height /5.5);//cornice strumenti
-    //
-     tut1.reset();
-     tut2.reset();
-     tut3.reset();
+    document.getElementById("tut1").style.display = "flex";
+      document.getElementById("tut2").style.display = "flex";
+        document.getElementById("tut3").style.display = "flex";
+
 
     xBarra = ((width / 3.5) / 100) * 100;
     push();
@@ -296,6 +289,10 @@ function draw() {
     pop();
 
   } else if (pag == 7) { //////////////////////////////////////////////// STADIO INGRESSO
+
+    document.getElementById("tut1").style.display = "none";
+      document.getElementById("tut2").style.display = "none";
+        document.getElementById("tut3").style.display = "none";
 
     button_text = 'Inizia';
     h1 = 'Unisciti';
@@ -328,7 +325,11 @@ function draw() {
 ///////////// FINE DRAW ////////////////////////////////////////////////////////
 
 function p() {
-  pag++;
+    if (pag == 5 && spunta == 0){  
+  }else {
+    pag++;
+  }
+
   if (pag == 7){
     socket.emit('startTimer');
   }
