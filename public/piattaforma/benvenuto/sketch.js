@@ -3,7 +3,7 @@ let socket = io(); //setting server
 
 let logoIcon, benvenuto, imm_condizioni;
 let b1, b2, button_text, testo_privacy, stadio;
-let imm1, imm2, imm3, imm4, strumenti;
+let imm1, imm2, imm3, imm4;
 let w, h, s, xBarra, logor;
 let i = 0;
 let pag = 0;
@@ -39,7 +39,6 @@ function preload() {
   imm3 = loadImage("./assets/avversione.png");
   imm4 = loadImage("./assets/scaramanzia.png");
   testo_privacy = loadImage("./assets/testo.png");
-  strumenti = loadImage("./assets/strumenti.png");
 
 }
 
@@ -69,14 +68,14 @@ function draw() {
   if (i > 1 && pag == 0) {
     background('#F9F9F9'); //chiaro
     button_text = 'Inizia';
-    image(benvenuto, w * 10, height / 50 * 28, benvenuto.width / 6, benvenuto.height / 6);
+    image(benvenuto, w * 10, height / 50 * 26.5, benvenuto.width / 6, benvenuto.height / 6);
     //testo caratteristiche
     textFont('quicksand');
     textAlign(CENTER, TOP);
     textStyle(BOLD);
 
-    textSize(15);
-    text('IL VERO TIFO', w * 10, h * 18.3);
+    textSize(13);
+    //text('IL VERO TIFO', w * 9.95, h * 18);
     //testo centrale
     textSize(30);
     fill('#B7AEB5'); //3° PALETTE
@@ -257,7 +256,7 @@ function draw() {
 
     textSize(12);
     text(step, w * 10, h * 10);
-    //text('HO LETTO E ACCETTATO L’INFORMATIVA PRIVACY', w * 10, h * 38);
+
     document.getElementById("container").style.display = 'flex';
 
     document.getElementById("tut1").style.display = "none";
@@ -272,12 +271,19 @@ function draw() {
     h1 = 'Ecco gli strumenti';
     h2 = 'per tifare';
     step = ' step 3/3';
-    image(strumenti, w * 10, height / 50 * 29, strumenti.width / 1.5, strumenti.height / 1.5);//cornice strumenti
+
 
     document.getElementById("tut1").style.display = "flex";
       document.getElementById("tut2").style.display = "flex";
         document.getElementById("tut3").style.display = "flex";
 
+        push();
+        textSize(15);
+        fill('#877B85');
+        text('TROMBETTA', w * 6.9, h *32);
+        text('SCIARPATA', w * 10, h * 32);
+        text('ESULTANZA', w * 13.1, h * 32);
+        pop();
 
     xBarra = ((width / 3.5) / 100) * 100;
     push();
@@ -325,7 +331,7 @@ function draw() {
 ///////////// FINE DRAW ////////////////////////////////////////////////////////
 
 function p() {
-    if (pag == 5 && spunta == 0){  
+    if (pag == 5 && spunta == 0){
   }else {
     pag++;
   }
