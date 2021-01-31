@@ -226,9 +226,9 @@ function draw() {
     noStroke();
     for (let i = 0; i < 4; i++) {
       fill('#d6d1d3');
-      ellipse(w * 9.3 + s, h * 39, 10);
+      ellipse(w * 9.35 + s, h * 39, 10);
       fill('#877B85');
-      ellipse(w * 9.3 + 60, h * 39, 10);
+      ellipse(w * 9.35 + 60, h * 39, 10);
       s = 20 * i;
     }
     h1 = 'Leggi e accetta';
