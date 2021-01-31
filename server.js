@@ -35,6 +35,14 @@ function newConnection(socket) {
   socket.on("daspoOut", function(dataReceived){//daspo
   socket.broadcast.emit("daspoIn", dataReceived)
   });
-  
+
+  socket.on("trombettaSocketOn", function(){//daspo
+  socket.broadcast.emit("trombettaSocketOn")
+  });
+
+  socket.on("trombettaSocketOff", function(){//daspo
+  socket.broadcast.emit("trombettaSocketOff")
+  });
+
   //* aggiungi qui i messaggi per farli rimbalzare a tutti
 }
