@@ -336,7 +336,7 @@ function p() {
     pag++;
   }
 
-  if (pag == 7){
+  if (pag == 8){
     socket.emit('startTimer');
   }
 }
